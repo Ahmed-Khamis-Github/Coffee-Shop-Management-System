@@ -222,10 +222,22 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('categories.index') }}" class="nav-link">
+            <a href="{{ route('categories.products') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Products
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a href="{{ route('categories.users') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                users
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>

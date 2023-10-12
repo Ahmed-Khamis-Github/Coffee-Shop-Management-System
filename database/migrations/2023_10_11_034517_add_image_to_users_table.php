@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('image')->nullable()->after('password') ;
 
-            $table->string('room')->after('image') ;
+            $table->string('room')->nullable()->after('image') ;
         });
     }
 
