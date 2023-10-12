@@ -1,0 +1,21 @@
+order -> id - user_id -   name - (address(nullable)) - mobile number(nullable)  - payment_method(default-cash) - status(pending-deliverd-canceled) -total  
+
+        1   -  5  - ahmed - damnho - 010 - cod - out - 500
+
+        7 -  6 - islam -
+
+        
+
+0rde_products oder_id product_id product_name price quantity 
+                1  -  7  -  cafe late  - 20 - 2
+                1  -  9   - cafe - 10 - 3 
+                1  -  11 - capit - 30 - 5
+
+
+
+
+order -> id - user_id -   name - (address(nullable)) - mobile number(nullable)  - payment_method(default-cash) - status(pending-deliverd-canceled) -total  
+
+products -> id -categ_id - name - price - compare_price 
+
+0rde_products oder_id product_id product_name price quantity 
