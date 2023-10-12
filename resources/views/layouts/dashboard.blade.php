@@ -222,7 +222,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('categories.products') }}" class="nav-link">
+            <a href="{{ route('products.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Products
@@ -234,7 +234,7 @@
 
 
           <li class="nav-item">
-            <a href="{{ route('categories.users') }}" class="nav-link">
+            <a href="{{ route('users.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 users
