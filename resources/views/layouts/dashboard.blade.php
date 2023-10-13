@@ -383,9 +383,10 @@
 				});*/ //incase you want it
 			let $cateName = $("#cateName");
 			let $cateSlug = $("#cateSlug");
-			$cateName.on("input", function() {
+			$cateName.on("input", function(e) {
 				$cateSlug.val(slugify($cateName.val()));
 			});
+
 		</script>
 	</body>
 

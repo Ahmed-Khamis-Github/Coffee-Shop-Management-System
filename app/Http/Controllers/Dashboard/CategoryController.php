@@ -41,8 +41,9 @@ class CategoryController extends Controller
 		// $category->image = $image;
 		$category->description = $description;
 		$category->save();
-		dd($category);
-		// return to_route('dashboard.categories.index');
+
+
+		return to_route('categories.index');
 		//
 	}
 

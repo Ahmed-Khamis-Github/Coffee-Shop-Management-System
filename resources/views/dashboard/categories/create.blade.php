@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
-	<form action="{{ route('categories.store') }}" enctype="multipart/form-data">
+	<form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
 		@csrf
 		<div class="card-body">
 			<div class="form-group">
@@ -9,7 +9,7 @@
 			</div>
 			<div class="form-group">
 				<label for="cateSlug">Slug</label>
-				<input type="text" name="slug" class="form-control" id="cateSlug" placeholder="Slug">
+				<input type="text" name="slug" class="form-control" id="cateSlug" placeholder="Slug" pattern="[A-Za-z0-9]+" onkeydown="if(['Space'].includes(arguments[0].code)){return false;}">
 			</div>
 			<div class="form-group">
 				<label>Description</label>

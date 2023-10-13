@@ -28,6 +28,9 @@
 							Name
 						</th>
 						<th style="width: 30%">
+							Description
+						</th>
+						<th style="width: 30%">
 							Image
 						</th>
 						<th style="width: 20%">
@@ -42,6 +45,9 @@
 						</td>
 						<td>
 							{{$category->name}}
+						</td>
+						<td>
+							{{$category->description}}
 						</td>
 						<td>
 							<img src="" alt="">
