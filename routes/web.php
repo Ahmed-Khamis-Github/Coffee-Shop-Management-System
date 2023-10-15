@@ -4,11 +4,9 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\OfflineOrdersController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Front\ProductListController;
  
-
-
- 
-
+    //routes of dashboard(admin)
  
     Route::resource('categories',CategoryController::class) ;
    
@@ -22,6 +20,8 @@ use App\Http\Controllers\Dashboard\ProductController;
     });
 
 
+    //routes of Front
+   Route::resource('/',ProductListController::class);
 
 
 
@@ -29,9 +29,9 @@ use App\Http\Controllers\Dashboard\ProductController;
 
 
 
-Route::get('/', function () {
-    return view('front.home'); 
-});
+
+
+
 
 
 

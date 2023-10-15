@@ -45,8 +45,7 @@ return [
         ],
         'product_uploads' => [
             'driver' => 'local',
-            'root' => public_path('images/product_image'),
-            
+            'root' => public_path('images/product_image'),  
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
