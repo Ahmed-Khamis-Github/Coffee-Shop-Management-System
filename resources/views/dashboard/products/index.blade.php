@@ -1,1 +1,146 @@
- 
+@extends('layouts.dashboard');
+@section('content');
+
+{{-- <div class="container">
+    <h3>  <a href="{{route('products.create')}}" class="link-primary">add product</a> </h3>
+
+    <table class="table table-striped table-dark ">
+    
+        <thead>
+          <tr>
+            <th scope="col">name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">image</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($products as  $product)
+                
+        
+          <tr>
+            <th scope="row">{{$product->name}}</th>
+            <td>{{$product->price}}</td>
+            <td>{{$product->quantity}}</td>
+            <td>  <img src="{{ asset('images/product_image/'.$product->image) }}" alt="" height="50px"> </td>
+            <td class="d-flex justify-content-around w-50">
+              <div>
+                @if ($product->quantity > 0)
+                    <span >Available</span>
+                @else
+                    <span >Unavailable</span>
+                @endif
+              </div>
+              <div><button type="button" class="btn btn-success mx-5"><a href="{{route('products.edit' , $product->id)}}">Edit</a></button>
+              </div>
+                <div >
+                  <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                </div>
+  
+
+
+            </td>
+           
+            
+          </tr>
+          @endforeach
+         
+        </tbody>
+      </table>
+
+</div> --}}
+
+
+
+
+
+
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"> <a href="{{route('products.create')}}">add product</h3>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-striped projects">
+            <thead>
+                <tr>
+                    <th style="width: 1%">
+                        #
+                    </th>
+                    <th style="width: 20%">
+                     Name
+                    </th>
+                    <th style="width: 20%">
+                      Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th style="width: 20%" class="text-center">
+                      image
+                    </th>
+                    <th style="width: 8%" class="text-center">
+                        Status
+                    </th>
+                    <th >
+                     
+                    </th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+              @foreach ($products as $product)
+                <tr>
+                    <td>
+                        #
+                    </td>
+                    <td>
+                        {{$product->name}}
+                    </td>
+                    <td>
+                      {{$product->price}}
+                    </td>
+                    <td>
+                      {{$product->quantity}}
+                    </td>
+                    <td>  <img src="{{ asset('images/product_image/'.$product->image) }}" alt="" height="50px"> </td>
+                    <td class="project-state">
+                      @if($product->quantity>0)
+                        <span class="badge badge-success">Available</span>
+                      @else
+                        <span class="badge badge-success">Unavailable</span>
+                      @endif
+                    </td>
+
+                    <td class="project-actions text-right d-flex align-items-center" >
+                        <a class="btn btn-info btn-sm mr-3" href="{{route('products.edit' , $product->id)}}">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Edit
+                        </a>
+                          <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="mt-3">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" >  <i class="fas fa-trash" >
+                            </i>Delete</button>
+                        </form>
+                    </td>
+
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+  </section>
+  @stop
