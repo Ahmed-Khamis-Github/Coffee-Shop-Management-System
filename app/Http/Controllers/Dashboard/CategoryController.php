@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
+
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -33,11 +34,10 @@ class CategoryController extends Controller
 
 		$request_data = $request->all();
 		$image = $request_data['image'];
-		$request_data["image"]='';
+		$path = $image->store("", 'categories_images');
+		$request_data["image"] = $path;
 		Category::create($request_data);
 
-		// $path = $image->store("uploadedfile", 'track_uploads');
-		// $request_data["image"] = $path;
 
 
 
@@ -51,7 +51,7 @@ class CategoryController extends Controller
 	public function show(string $id)
 	{
 		$category = Category::findorfail($id);
-		return view('dashboard.categories.show',compact('category'));
+		return view('dashboard.categories.show', compact('category'));
 	}
 
 	/**
@@ -60,7 +60,7 @@ class CategoryController extends Controller
 	public function edit(string $id)
 	{
 		$category = Category::findorfail($id);
-		return view('dashboard.categories.edit',compact('category'));
+		return view('dashboard.categories.edit', compact('category'));
 	}
 
 	/**
@@ -68,8 +68,21 @@ class CategoryController extends Controller
 	 */
 	public function update(StoreCategoryRequest $request, string $id)
 	{
-		//
-		dd($request->all());
+		$category = Category::findorfail($id);
+
+		$request_data = $request->all();
+
+		if ($request->has('image')) {
+			unlink("images/categories/$category->image");
+			$image = $request_data['image'];
+			$path = $image->store("", 'categories_images');
+			$request_data["image"] = $path;
+		}else{
+			$request_data["image"] = $category->image;
+		}
+
+		$category->update($request_data);
+		return to_route('categories.index');
 	}
 
 	/**
@@ -77,14 +90,8 @@ class CategoryController extends Controller
 	 */
 	public function destroy(Category $category)
 	{
-		    //    if($track->logo){
-        //     try {
-        //         unlink("images/track_logo/{$track->logo}");
-        //     }catch (\Exception $e){
-        //         dd($e);
-        //     }
-        // }
-        $category->delete();
-        return to_route('categories.index');
+		unlink("images/categories/$category->image");
+		$category->delete();
+		return to_route('categories.index');
 	}
 }

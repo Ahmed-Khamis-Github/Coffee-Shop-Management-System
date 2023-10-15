@@ -50,7 +50,8 @@
 								{{ $category->description }}
 							</td>
 							<td>
-								<img src="" alt="">
+									<img src="{{ asset("images/categories/$category->image") }}" class="img-size-64 img-bordered" >
+
 							</td>
 							<td class="project-actions text-right">
 								<a class="btn btn-primary btn-sm" href="{{ route('categories.show', $category->id) }}">

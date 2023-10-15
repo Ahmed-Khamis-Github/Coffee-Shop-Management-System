@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
+<img src="{{ asset("images/categories/$category->image") }}" class="img-size-64 img-bordered" >
 	<form action="{{ route('categories.update',$category->id) }}" method="post" enctype="multipart/form-data">
 		@csrf
 		@method('PUT')
@@ -26,11 +27,14 @@
 					<div style="color: red; font-weight: bold"> {{ $message }}</div>
 				@enderror
 			</div>
+
 			<div class="form-group">
-				<label for="cateImage">Image</label>
+				<label for="cateImage">Image
+									</label>
 				<div class="input-group">
 					<div class="custom-file">
 						<input type="file" name="image" class="custom-file-input" id="cateImage">
+
 						<label class="custom-file-label" for="cateImage">Category image</label>
 					</div>
 					<div class="input-group-append">
