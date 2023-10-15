@@ -7,14 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\OfflineOrdersController;
 use App\Http\Controllers\Dashboard\ProductController;
 
-
-
-
-
-
-    Route::resource('categories',CategoryController::class) ;
-
-    Route::resource('users',CategoryController::class) ;
+require __DIR__.'/dashboard.php';
+require __DIR__.'/front.php';
 
 
 
@@ -25,16 +19,5 @@ use App\Http\Controllers\Dashboard\ProductController;
 
 
 
-
-
-Route::get('/', function () {
-    return view('front.home');
-});
-
-Route::resource('categories', CategoryController::class);
-
-Route::resource('users', CategoryController::class);
-
-Route::resource('products', ProductController::class);
 
 
