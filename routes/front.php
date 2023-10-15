@@ -1,8 +1,6 @@
 <?php 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Front\ProductListController;
 
-
-Route::get('/', function () {
-    return view('front.home');
-});
+Route::get('/', [ProductListController::class , 'index']);
