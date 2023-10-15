@@ -12,16 +12,11 @@ use App\Http\Controllers\Dashboard\ProductController;
 
 
 
-Route::resource('categories', CategoryController::class);
+    Route::resource('categories',CategoryController::class) ;
 
-Route::resource('users', CategoryController::class);
-
-
+    Route::resource('users',CategoryController::class) ;
 
 
-Route::get('checkout', function () {
-	return view('front.checkout');
-});
 
 
 
@@ -33,7 +28,7 @@ Route::get('checkout', function () {
 
 
 Route::get('/', function () {
-	return view('front.home');
+    return view('front.home');
 });
 
 Route::resource('categories', CategoryController::class);
@@ -43,7 +38,3 @@ Route::resource('users', CategoryController::class);
 Route::resource('products', ProductController::class);
 
 
-Route::prefix('orders')->group(function () {
-	Route::resource('offline', OfflineOrdersController::class);
-	Route::resource('online', OnlineOrdersController::class);
-});

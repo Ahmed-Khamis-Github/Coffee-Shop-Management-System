@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class OfflineOrdersController extends Controller
 {
@@ -14,6 +18,7 @@ class OfflineOrdersController extends Controller
      */
     public function index()
     {
+        
         $products = Product::all();
         $users = User::all();
         return view('dashboard.orders.offline', compact('users', 'products'));
@@ -24,7 +29,6 @@ class OfflineOrdersController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -32,7 +36,68 @@ class OfflineOrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $selectedProducts = request()->input('selected_products');
+        $productQuantities = request()->input('product_quantities');
+
+         $filteredData = collect($selectedProducts)->mapWithKeys(function ($productId) use ($productQuantities) {
+            return [
+                $productId => $productQuantities[$productId],
+            ];
+        })->toArray();
+
+
+         $user = User::findOrFail($request->user_id);
+
+         // dd($selected);
+        // dd($request->all(),$filteredData);
+
+
+         DB::beginTransaction();
+        try {
+
+        $order = order::create([
+            'user_id' => $request->user_id,
+            'user_name' => $user->name,
+            'payment_method' => 'cash',
+            'order_type'=>'1000',
+            'total'=>'10000'
+
+        ]);
+
+        // dd($order) ;
+
+
+
+ 
+        foreach ($filteredData as $item => $quantity) {
+            $product = Product::find($item);
+            OrderProduct::create([
+                'order_id' => $order->id,
+                'product_id' => $item,
+                'product_name' => $product->name,
+                'price' => $product->price,
+                'quantity' => $quantity,
+            ]);
+        }
+
+        $user->update([
+            'room'=>$request->room
+        ]) ;
+
+
+            
+             DB::commit();
+
+            // event(new OrderCreated($order)) ;
+
+        } catch (Throwable $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        return redirect()->route('offline.index') ;
+
     }
 
     /**
