@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\CategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\OfflineOrdersController;
 
 
  
@@ -17,7 +18,9 @@ use Illuminate\Support\Facades\Route;
     Route::resource('users',CategoryController::class) ;
    
     
- 
+    Route::prefix('orders')->group(function () {
+        Route::resource('offline', OfflineOrdersController::class);
+    });
 
 
 
