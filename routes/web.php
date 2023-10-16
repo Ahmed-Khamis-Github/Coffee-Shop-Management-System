@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CheckoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +17,4 @@ require __DIR__.'/auth.php';
 
 
 
-
-
-
-
-
-
+Route::resource('checkouts', CheckoutController::class);
