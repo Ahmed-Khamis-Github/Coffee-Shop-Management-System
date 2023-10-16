@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -21,7 +22,8 @@ class OfflineOrdersController extends Controller
         
         $products = Product::all();
         $users = User::all();
-        return view('dashboard.orders.offline', compact('users', 'products'));
+        $rooms = Room::all() ;
+        return view('dashboard.orders.offline', compact('users', 'products','rooms'));
     }
 
     /**
@@ -62,7 +64,8 @@ class OfflineOrdersController extends Controller
             'user_name' => $user->name,
             'payment_method' => 'cash',
             'order_type'=>'1000',
-            'total'=>'10000'
+            'order_type'=>'offline' ,
+             
 
         ]);
 
@@ -83,7 +86,7 @@ class OfflineOrdersController extends Controller
         }
 
         $user->update([
-            'room'=>$request->room
+            'room_id'=>$request->room
         ]) ;
 
 

@@ -67,4 +67,9 @@ class User extends Authenticatable
     public function getProviderTokenAttribute($value){
         return Crypt::decryptString($value);
     }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class) ;
+    }
 }

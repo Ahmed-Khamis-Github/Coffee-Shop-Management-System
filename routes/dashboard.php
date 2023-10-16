@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\ChecksOfflineController;
 use App\Http\Controllers\Dashboard\OnlineOrdersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\OfflineOrdersController;
 use App\Http\Controllers\Dashboard\ProductController;
-use App\Http\Controllers\Dashboard\UserController;
-
+ 
 
 Route::group(['prefix' => 'dashboard' , 'middleware'=>'user.type'], function () {
 
@@ -20,6 +20,7 @@ Route::group(['prefix' => 'dashboard' , 'middleware'=>'user.type'], function () 
 
     Route::prefix('orders')->group(function () {
         Route::resource('offline', OfflineOrdersController::class);
-        Route::resource('online', OnlineOrdersController::class);
+         Route::resource('online', OnlineOrdersController::class);
+         Route::resource('checks', ChecksOfflineController::class);
     });
 });

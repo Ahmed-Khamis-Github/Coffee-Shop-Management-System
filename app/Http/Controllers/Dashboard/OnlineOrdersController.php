@@ -14,7 +14,7 @@ class OnlineOrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::with('products')->get();
+        $orders = Order::with('products')->where('order_type','online')->get();
 
         return view('dashboard.orders.index', compact('orders'));
     }

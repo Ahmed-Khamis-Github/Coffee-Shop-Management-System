@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum("role", ["admin" , "user "] )->default("user");
-           
+            $table->foreignId('room_id')->nullable()->constrained('rooms')->after('image')->nullOnDelete()->cascadeOnUpdate() ;
         });
     }
 
@@ -23,8 +22,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['role']) ;
-
+            $table->dropForeign(['room_id']);
+            $table->dropColumn('room_id');
         });
     }
 };

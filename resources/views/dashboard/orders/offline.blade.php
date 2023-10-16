@@ -346,8 +346,7 @@
                             <thead>
                                 <tr>
                                     <th>Select</th>
-                                    <th>Logo</th>
-                                    <th>Product</th>
+                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
                                 </tr>
@@ -360,8 +359,7 @@
                                     <td>
                                         <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
                                     </td>
-                                    <td><img src="{{ $product->image }}" alt=""></td>
-                                    <td>{{ $product->name }}</td>
+                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>
                                         <input type="number" name="product_quantities[{{ $product->id }}]" value="1" class="form-control">
@@ -391,8 +389,15 @@
               
               <div class="card-body">
                 <div class="form-group">
-                      <label>Room NO</label>
-                       <input type="text" class="form-control" placeholder="enter room number" name="room">
+                      
+                      <div class="form-group">
+                        <label>Rooms Number</label>
+                        <select class="select2"  data-placeholder="Select a State" style="width: 100%;" name="user_id">
+                          @foreach ($rooms as $room )
+                          <option value="{{ $room->id }}">{{ $room->name }}</option>     
+                          @endforeach
+                        </select>
+                      </div>
                        
                       </select>
                     </div>

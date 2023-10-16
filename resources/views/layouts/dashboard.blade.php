@@ -287,8 +287,15 @@
                                     </a>
                                 </li>
 
-                            </ul>
-                        </li>
+									<li class="nav-item">
+										<a href="{{ route('offline.checks') }}" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Check Offline Orders </p>	
+										</a>
+									</li>
+
+								</ul>
+							</li>
 
                     </ul>
                 </nav>
