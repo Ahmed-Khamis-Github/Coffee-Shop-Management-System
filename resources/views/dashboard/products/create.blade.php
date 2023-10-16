@@ -3,34 +3,37 @@
 <div class="container">
     <form method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
       @csrf
-<div class="form-group">
+  <div class="form-group">
     <label for="formGroupExampleInput">name</label>
     <input type="text" class="form-control" id="formGroupExampleInput" name="name">
-    @error('name')
+  </div>
+  @error('name')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
-  </div>
+
+
   <div class="form-group">
     <label for="formGroupExampleInput2">price</label>
     <input type="text" class="form-control" id="formGroupExampleInput2" name="price">
-    @error('price')
+  </div>
+  @error('price')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
-  </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">quantity</label>
     <input type="text" class="form-control" id="formGroupExampleInput2" name="quantity">
-    @error('quantity')
+  </div>
+  @error('quantity')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
-  </div>
+
   <div class="form-group">
     <label for="formGroupExampleInput2">image</label>
     <input type="file" class="form-control" id="formGroupExampleInput2" name="image">
-    @error('image')
-    <div class="alert alert-danger">{{ $message }}</div>
-@enderror
   </div>
+  @error('image')
+  <div class="alert alert-danger">{{ $message }}</div>
+@enderror
   
   <div class="form-group">
   <label for="Category_Name">Category</label>
@@ -41,11 +44,10 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('category_id')
-    <div class="alert alert-danger">{{ $message }}</div>
-@enderror
 </div>
-
+@error('category_id')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
   
   <button type="submit" class="btn btn-primary m-2" >Create</button>
 </form>

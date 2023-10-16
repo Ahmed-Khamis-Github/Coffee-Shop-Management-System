@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(7);
        
         return View('dashboard.products.index', compact('products'));
     
@@ -36,7 +36,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $slug = $request->merge([
             "slug"=>Str::slug($request->name)
@@ -47,8 +47,6 @@ class ProductController extends Controller
             $path = $image->store('uploadedfile', 'product_uploads');
             $request_data["image"]=$path;
         }
-        // dd($request->all());
-        // $validatedData = $request->validated();
         $product = Product::create($request_data);
          return redirect()->route('products.index');
     }
@@ -74,7 +72,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, String $id)
+    public function update(ProductRequest $request, String $id)
     {
         $product = Product::findOrFail($id);
         $product->update($request->all());

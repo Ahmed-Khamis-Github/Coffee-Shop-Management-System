@@ -123,7 +123,12 @@
       </div>
     </div>
 
+    <form class="heading-section ftco-animate text-center my-5" method="GET" action="search">
+      @csrf
+      <input type="search" placeholder="search here .." class="bg-transparent text-white" name="query">
+      <button type="submit" class="btn btn-primary">search </button>
 
+    </form>
 
     <div class="row">
       @foreach ($products as $product )
@@ -139,6 +144,10 @@
         </div>
       </div>
       @endforeach
+    </div>
+
+    <div class="d-flex justify-content-center bg-black">
+      {{$products->links()}}
     </div>
 
   </div>

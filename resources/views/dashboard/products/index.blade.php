@@ -1,64 +1,6 @@
 @extends('layouts.dashboard');
 @section('content');
 
-{{-- <div class="container">
-    <h3>  <a href="{{route('products.create')}}" class="link-primary">add product</a> </h3>
-
-    <table class="table table-striped table-dark ">
-    
-        <thead>
-          <tr>
-            <th scope="col">name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">image</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-            @foreach ($products as  $product)
-                
-        
-          <tr>
-            <th scope="row">{{$product->name}}</th>
-            <td>{{$product->price}}</td>
-            <td>{{$product->quantity}}</td>
-            <td>  <img src="{{ asset('images/product_image/'.$product->image) }}" alt="" height="50px"> </td>
-            <td class="d-flex justify-content-around w-50">
-              <div>
-                @if ($product->quantity > 0)
-                    <span >Available</span>
-                @else
-                    <span >Unavailable</span>
-                @endif
-              </div>
-              <div><button type="button" class="btn btn-success mx-5"><a href="{{route('products.edit' , $product->id)}}">Edit</a></button>
-              </div>
-                <div >
-                  <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger">Delete</button>
-                  </form>
-                </div>
-  
-
-
-            </td>
-           
-            
-          </tr>
-          @endforeach
-         
-        </tbody>
-      </table>
-
-</div> --}}
-
-
-
-
-
 
   <section class="content">
 
@@ -141,6 +83,8 @@
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
-
+    <div class="d-flex justify-content-center w-100">
+      {{$products->links()}}
+    </div>
   </section>
   @stop

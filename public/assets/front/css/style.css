@@ -9289,12 +9289,7 @@ textarea.form-control {
   font-size:17px;
   
 }
-.cancel-click{
-  cursor: pointer;
-}
-.cancel-click:hover{
-color: #c49b63;
-}
+
 .table-head{
   color: #c49b63;
 }

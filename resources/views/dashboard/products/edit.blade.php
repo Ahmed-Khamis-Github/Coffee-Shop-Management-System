@@ -8,18 +8,34 @@
     <label for="formGroupExampleInput">name</label>
     <input type="text" class="form-control" id="formGroupExampleInput" name="name" value={{$product->name}}>
   </div>
+  @error('name')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
   <div class="form-group">
     <label for="formGroupExampleInput2">price</label>
     <input type="text" class="form-control" id="formGroupExampleInput2" name="price" value={{$product->price}}>
   </div>
+  @error('price')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
   <div class="form-group">
     <label for="formGroupExampleInput2">image</label>
     <input type="file" class="form-control" id="formGroupExampleInput2" name="image" value={{$product->image}}>
   </div>
+  @error('image')
+  <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+
   <div class="form-group">
     <label for="formGroupExampleInput2">quantity</label>
     <input type="text" class="form-control" id="formGroupExampleInput2" name="quantity" value={{$product->quantity}}>
   </div>
+  @error('quantity')
+  <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+
+
   <div class="form-group">
     <label for="formGroupExampleInput2">Category</label>
      
@@ -32,6 +48,11 @@
       @endforeach
   </select> 
   </div>
+  @error('category_id')
+  <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+
+
   <div class="form-group">
 
 </div>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderProduct;
 
 class ProductListController extends Controller
 {
@@ -14,58 +16,62 @@ class ProductListController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    { 
-          
-        $products = Product::all();
+    {  
+        $products = Product::paginate(8);
         return view('front.home' , compact('products'));
         
     }
+    public function search(Request $request) {
+  
+        $search = $request->query->get('query');
+        $products = Product::where(function($query) use ($search){
+          $query->where('name', 'like', "%{$search}%");
+        })->paginate(8);
+      
+        return view('front.home', compact('products'));
+      
+      }
+      
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    // to show all orders and order details
+    public function orderList()
     {
-        //
+            $orders = Order::all();
+            $orderDetails = OrderProduct::all();
+            return view('front.track', compact('orders', 'orderDetails'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+
+
+    public function update(Request $request , $id){
+        $order = Order::findOrFail($id);
+        $order->update([
+            "order_status"=> "cancelled"
+        ]);
+        return redirect()->route('orderList');
+        
+    }
+    //make filter using Date
+    public function filter(Request $request)
     {
-        //
+        $orderDetails = OrderProduct::all();
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        
+        if ($start_date && $end_date) {
+            $orders = Order::whereDate('created_at', '>=', date('Y-m-d', strtotime($start_date)))
+            ->whereDate('created_at', '<=', date('Y-m-d', strtotime($end_date)))
+            ->get();
+        } else {
+            $orders = [];
+        }
+    
+        return view('front.track', compact('orders','orderDetails'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
