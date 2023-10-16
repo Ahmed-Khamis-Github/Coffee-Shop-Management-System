@@ -52,8 +52,18 @@
 
 
 
-            <div class="form-group mt-4 mx-auto d-block w-25">
-                <input type="submit" value="Login" class="btn btn-primary py-3 px-5">
+            <div class="d-flex justify-content-center">
+                <div class="form-group mt-4 mx-2 d-block">
+                    <input type="submit" value="Login" class="btn btn-primary py-3 px-4">
+                </div>
+            
+                <div class="form-group mt-4 mx-2 d-block">
+                    <a href="{{ route('auth.socialite.redirect', 'google') }}" class="btn btn-primary py-3 px-4">Login with Gmail</a>
+                </div>
+            
+                <div class="form-group mt-4 mx-2 d-block">
+                    <a href="{{ route('auth.socialite.redirect', 'github') }}" class="btn btn-primary py-3 px-4">Login with GitHub</a>
+                </div>
             </div>
         </form>
     </div>
