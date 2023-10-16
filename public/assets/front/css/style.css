@@ -9281,3 +9281,20 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+.order-table{
+
+  color: #fff;
+  font-weight: 400;
+
+  font-size:17px;
+  
+}
+.cancel-click{
+  cursor: pointer;
+}
+.cancel-click:hover{
+color: #c49b63;
+}
+.table-head{
+  color: #c49b63;
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -28,19 +29,16 @@ class CategoryController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(Request $request)
+	public function store(StoreCategoryRequest $request)
 	{
-		$name = $request->name;
-		$slug = $request->slug;
-		$image = $request->image;
-		$description = $request->description;
 
-		$category = new Category;
-		$category->name = $name;
-		$category->slug = $slug;
-		// $category->image = $image;
-		$category->description = $description;
-		$category->save();
+		$request_data = $request->all();
+		$image = $request_data['image'];
+		$path = $image->store("", 'categories_images');
+		$request_data["image"] = $path;
+		Category::create($request_data);
+
+
 
 
 		return to_route('categories.index');
@@ -52,7 +50,8 @@ class CategoryController extends Controller
 	 */
 	public function show(string $id)
 	{
-		//
+		$category = Category::findorfail($id);
+		return view('dashboard.categories.show', compact('category'));
 	}
 
 	/**
@@ -60,22 +59,39 @@ class CategoryController extends Controller
 	 */
 	public function edit(string $id)
 	{
-		//
+		$category = Category::findorfail($id);
+		return view('dashboard.categories.edit', compact('category'));
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 */
-	public function update(Request $request, string $id)
+	public function update(StoreCategoryRequest $request, string $id)
 	{
-		//
+		$category = Category::findorfail($id);
+
+		$request_data = $request->all();
+
+		if ($request->has('image')) {
+			unlink("images/categories/$category->image");
+			$image = $request_data['image'];
+			$path = $image->store("", 'categories_images');
+			$request_data["image"] = $path;
+		}else{
+			$request_data["image"] = $category->image;
+		}
+
+		$category->update($request_data);
+		return to_route('categories.index');
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(string $id)
+	public function destroy(Category $category)
 	{
-		//
+		unlink("images/categories/$category->image");
+		$category->delete();
+		return to_route('categories.index');
 	}
 }

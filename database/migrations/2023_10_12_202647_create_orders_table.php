@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('mobile_number')->nullable();
             $table->enum('payment_method',['cash','visa'])->default('cash');
             $table->enum('order_status', ['Awaiting_Approval','Working_On_It', 'delivered', 'cancelled'])->default('Awaiting_Approval');
-            $table->decimal('total', 10, 2);  
+            $table->enum('order_type',['online','offline'])->default('online');  
             $table->timestamps();  
 
 

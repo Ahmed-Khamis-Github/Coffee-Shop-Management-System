@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/dropzone/min/dropzone.min.css")}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset("assets/dashboard/dist/css/adminlte.min.css")}}">
+
+  
 </head>
 
 
@@ -324,30 +326,51 @@
                   </button>
                 </div>
               </div>
+              <form action="{{ route('offline.store') }}" method="post">
+                @csrf
               <div class="card-body">
                     <div class="form-group">
                       <label>Select User</label>
-                      <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                        <option>Alabama</option>
-                        <option>Alaska</option>
-                        <option>California</option>
-                        <option>Delaware</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
+                      <select class="select2"  data-placeholder="Select a State" style="width: 100%;" name="user_id">
+                        @foreach ($users as $user )
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>     
+                        @endforeach
                       </select>
                     </div>
+
+                    
                     <div class="form-group">
-                        <label>Product List</label>
-                        <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                          <option>Alabama</option>
-                          <option>Alaska</option>
-                          <option>California</option>
-                          <option>Delaware</option>
-                          <option>Tennessee</option>
-                          <option>Texas</option>
-                          <option>Washington</option>
-                        </select>
+                   
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Logo</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                       
+
+                            <tbody>
+                                @foreach ($products as $product)
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
+                                    </td>
+                                    <td><img src="{{ $product->image }}" alt=""></td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>
+                                        <input type="number" name="product_quantities[{{ $product->id }}]" value="1" class="form-control">
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        
                       </div>
               </div>
               <!-- /.card-body -->
@@ -357,7 +380,7 @@
           <div class="col-md-6">
             <div class="card card-secondary">
               <div class="card-header">
-                <h3 class="card-title">Budget</h3>
+                <h3 class="card-title">Details</h3>
   
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -369,14 +392,8 @@
               <div class="card-body">
                 <div class="form-group">
                       <label>Room NO</label>
-                      <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                        <option>Alabama</option>
-                        <option>Alaska</option>
-                        <option>California</option>
-                        <option>Delaware</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
+                       <input type="text" class="form-control" placeholder="enter room number" name="room">
+                       
                       </select>
                     </div>
                 <div class="form-group">
@@ -388,12 +405,14 @@
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-12">
             <a href="#" class="btn btn-secondary">Cancel</a>
             <input type="submit" value="Save Changes" class="btn btn-success float-right">
           </div>
         </div>
+    </form>
       </section>
       <!-- /.content -->
     </div>
@@ -408,7 +427,21 @@
 <!-- ./wrapper -->
 
 
-
+     {{-- <tbody>
+                                @foreach ($products as $product)
+                                
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
+                                    </td>
+                                    <td><img src="{{ $product->image }}" alt=""></td>
+                                   
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td><input type="number" name="product_quantities[{{ $product->id }}]" value="1"></td>
+                                </tr>
+                                @endforeach
+                            </tbody> --}}
 
 
 

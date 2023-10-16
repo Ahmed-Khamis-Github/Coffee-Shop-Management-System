@@ -38,39 +38,43 @@
 					</tr>
 				</thead>
 				<tbody>
-				@foreach ($categories as $key => $category)
-					<tr>
-						<td>
-							{{ $key + 1 }}
-						</td>
-						<td>
-							{{$category->name}}
-						</td>
-						<td>
-							{{$category->description}}
-						</td>
-						<td>
-							<img src="" alt="">
-						</td>
-						<td class="project-actions text-right">
-							<a class="btn btn-primary btn-sm" href="#">
-								<i class="fas fa-folder">
-								</i>
-								View
-							</a>
-							<a class="btn btn-info btn-sm" href="#">
-								<i class="fas fa-pencil-alt">
-								</i>
-								Edit
-							</a>
-							<a class="btn btn-danger btn-sm" href="#">
-								<i class="fas fa-trash">
-								</i>
-								Delete
-							</a>
-						</td>
-					</tr>
-				@endforeach
+					@foreach ($categories as $key => $category)
+						<tr>
+							<td>
+								{{ $key + 1 }}
+							</td>
+							<td>
+								{{ $category->name }}
+							</td>
+							<td>
+								{{ $category->description }}
+							</td>
+							<td>
+									<img src="{{ asset("images/categories/$category->image") }}" class="img-size-64 img-bordered" >
+
+							</td>
+							<td class="project-actions text-right">
+								<a class="btn btn-primary btn-sm" href="{{ route('categories.show', $category->id) }}">
+									<i class="fas fa-folder">
+									</i>
+								</a>
+								<a class="btn btn-info btn-sm" href="{{ route('categories.edit', $category->id) }}">
+									<i class="fas fa-pencil-alt">
+									</i>
+								</a>
+								<form action="{{ route('categories.destroy', $category->id) }}" method="post"
+									class="btn btn-danger btn-sm"style="padding: 0px">
+									@csrf
+									@method('delete')
+									<label for="{{ 'del-' . $category->id }}" style="margin:0;padding:4px 8px;cursor:pointer">
+										<i class="fas fa-trash"></i>
+									</label>
+									<button id="{{ 'del-' . $category->id }}" type="submit" style="display:none"></button>
+								</form>
+								</a>
+							</td>
+						</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>
