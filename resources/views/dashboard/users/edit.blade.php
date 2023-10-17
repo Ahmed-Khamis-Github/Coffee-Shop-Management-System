@@ -47,14 +47,20 @@
 
                     <div class="input-group mb-3 align-items-center">
                         <label for="room" class="mr-2">Room</label>
-                        <input type="text" class="form-control" placeholder="room" name="room"
-                            value="{{ $user->room }}" id="room">
-                        <div class="input-group-append">
-                            <div class="input-group-text d-inline">
 
-                                <span class="fas fa-table"></span>
-                            </div>
-                        </div>
+                        <select name="room_id" class="form-control form-select mb-3 align-items-center " style="width: 25%"
+                            aria-label="Default select example">
+                            <option selected value="">not selected</option>
+
+                            @foreach ($rooms as $room)
+                            <option value="{{ $room->id }}" @if($room->id == $user->room_id) selected @endif>{{ $room->name }}</option>
+                            
+                            @endforeach
+
+                           
+
+
+                        </select>
                     </div>
                     {{-- show validation errors --}}
                     <div class="text-danger  mb-4">

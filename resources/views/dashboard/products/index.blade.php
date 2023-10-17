@@ -52,7 +52,7 @@
                     <td>
                       {{$product->quantity}}
                     </td>
-                    <td>  <img src="{{ asset('images/product_image/'.$product->image) }}" alt="" height="50px"> </td>
+                    <td class="text-center">  <img src="{{ asset('images/product_image/'.$product->image) }}"  alt="" height="50px"> </td>
                     <td class="project-state">
                       @if($product->quantity>0)
                         <span class="badge badge-success">Available</span>

@@ -41,7 +41,6 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="{{ route('home')}}" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="{{ route('orderList')}}" class="nav-link">My Orders</a></li>
                     <li class="nav-item"><a href="" class="nav-link">Cart</a></li>
 
                     @if (!Auth::user())
@@ -54,6 +53,8 @@
                                     class="icon icon-shopping_cart"></span><span
                                     class="bag d-flex justify-content-center align-items-center"><small>1</small></span></a>
                         </li>
+                        <li class="nav-item"><a href="{{ route('orderList')}}" class="nav-link">My Orders</a></li>
+
                     @endif
 
                     @if (Auth::user())

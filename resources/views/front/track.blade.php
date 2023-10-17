@@ -47,12 +47,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach ($orders as  $order)
+                          {{-- @foreach ($orders as  $order) --}}
                             
                             <tr>
                             <td>{{$order->created_at->format('y-m-d')}}</td>
                             <td class="order-table">{{$order->order_status}}</td>
-                            <td class="order-table" >{{$order->total}}</td>
+                            <td class="order-table" >{{$totalPrice}}</td>
                             <td>
                               @if($order->order_status === 'Awaiting_Approval')
                               
@@ -90,7 +90,7 @@
                           </td>
 
                           </tr>
-                          @endforeach
+                          {{-- @endforeach --}}
                       
                             
                    

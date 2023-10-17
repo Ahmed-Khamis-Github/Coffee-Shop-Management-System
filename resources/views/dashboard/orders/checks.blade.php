@@ -45,7 +45,7 @@
             <tbody>
                 @foreach ($orders as $order)
                     <tr data-user="John Doe">
-                        <td>{{ $order->user->room->name }}</td>
+                        <td>{{ $order->user->room->name ?? "default" }}</td>
                         <td>{{ $order->user->name }}</td>
                         <td>{{ $order->created_at->format('Y-m-d') }}</td>
                         <td>

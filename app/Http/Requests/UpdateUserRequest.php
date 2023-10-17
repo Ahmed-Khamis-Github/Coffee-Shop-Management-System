@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -21,11 +23,16 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-                'name' => 'required|string|max:255|min:2',
-                'email' => 'required|email|unique:users',
-                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
-                'room' => 'string',
-        ];
+        $id = Route::current()->parameter('id');
+ 
+    return [
+        'name' => 'required|string|max:255|min:2',
+        'email' => [
+            'required',
+            'email',
+            Rule::unique('users')->ignore($id),
+        ],
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ];
     }
 }

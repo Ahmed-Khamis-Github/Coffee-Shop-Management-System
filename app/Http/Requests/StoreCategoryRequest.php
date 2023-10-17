@@ -23,7 +23,6 @@ class StoreCategoryRequest extends FormRequest
 	{
 		$rules = [
 			'name' => 'required|min:1|max:32|unique:categories,name',
-			'slug' => 'required|min:1|max:32',
 			'description' => 'required',
 		];
 		if ($this->isMethod('post')) {
