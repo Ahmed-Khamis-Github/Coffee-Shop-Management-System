@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\CartController;
+use App\Http\Controllers\Front\CheckOutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\ProductListController;
 
@@ -16,3 +17,9 @@ Route::get('checkout',function(){
 } );
 
 Route::resource('carts', CartController::class);
+
+
+Route::post('carts/{id}',[CartController::class,'addToCart'])->name('cart.add') ;
+Route::post('carts/{id}',[CartController::class,'addToCart'])->name('cart.add') ;
+
+Route::resource('checkout', CheckOutController::class);

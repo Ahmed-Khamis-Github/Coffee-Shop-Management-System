@@ -1,29 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderProduct;
-use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Room;
-use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
-class OfflineOrdersController extends Controller
+class CheckOutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // dd($request->session()->get('cart'));
+        if (!$request->session()->has('cart')) {
+            $cart = [];
+        } else {
+            $cart = $request->session()->get('cart');
+        }
+        // dd($cart) ;
 
-        $products = Product::all();
-        $users = User::all();
-        $rooms = Room::all();
-        return view('dashboard.orders.offline', compact('users', 'products', 'rooms'));
+        $items = collect($cart);
+        // dd($items) ;
+
+        $totalPrice = $items->sum(function ($item) {
+            return $item['price'] * $item['quantity'];
+        });
+        return view('front.checkout',compact('totalPrice'));
     }
 
     /**
@@ -31,6 +39,7 @@ class OfflineOrdersController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -38,35 +47,30 @@ class OfflineOrdersController extends Controller
      */
     public function store(Request $request)
     {
+        $cart = $request->session()->get('cart');
+        // dd($cart) ;
+        $name = request()->input('user_name');
+        $address = request()->input('user_address');
+        $mobile = request()->input('mobile_number');
+ 
+        
 
 
-        $selectedProducts = request()->input('selected_products');
-        $productQuantities = request()->input('product_quantities');
+        $user = $request->user();
 
-        $filteredData = collect($selectedProducts)->mapWithKeys(function ($productId) use ($productQuantities) {
-            return [
-                $productId => $productQuantities[$productId],
-            ];
-        })->toArray();
-
-
-        $user = User::findOrFail($request->user_id);
-
-        // dd($selected);
-        // dd($request->all(),$filteredData);
+         
 
 
         DB::beginTransaction();
         try {
 
-            $order = order::create([
-                'user_id' => $request->user_id,
+            $order = Order::create([
+                'user_id' => $user->id,
                 'user_name' => $user->name,
-                'payment_method' => 'cash',
-                'order_type' => 'offline',
-                'order_status'=>'working_on_it'
-
-
+                'user_address'=> $address ,
+                'mobile_number'=>$mobile ,
+                'payment_method' => $request->payment,
+                'order_type' => 'online',
             ]);
 
             // dd($order) ;
@@ -74,20 +78,18 @@ class OfflineOrdersController extends Controller
 
 
 
-            foreach ($filteredData as $item => $quantity) {
-                $product = Product::find($item);
+            foreach ($cart as $item ) {
+                 $product = Product::find($item['id']);
                 OrderProduct::create([
                     'order_id' => $order->id,
-                    'product_id' => $item,
+                    'product_id' => $item['id'],
                     'product_name' => $product->name,
                     'price' => $product->price,
-                    'quantity' => $quantity,
+                    'quantity' => $item['quantity'],
                 ]);
             }
 
-            $user->update([
-                'room_id' => $request->room
-            ]);
+            
 
 
 
@@ -99,7 +101,7 @@ class OfflineOrdersController extends Controller
             DB::rollBack();
             throw $e;
         }
-        return redirect()->route('offline.index');
+        return redirect()->route('home') ;
     }
 
     /**

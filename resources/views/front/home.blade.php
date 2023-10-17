@@ -139,7 +139,13 @@
             <h3><a href="#">{{$product->name}}</a></h3>
             <p>A small river named Duden flows by their place and supplies</p>
             <p class="price"><span>{{$product->price}}</span></p>
-            <p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
+
+ 
+            <form action="{{ route('cart.add',$product->id) }}" method="post">
+            @csrf 
+            <p><button type="submit" class="btn btn-primary btn-outline-primary">Add to Cart</button></p>
+
+            </form>
           </div>
         </div>
       </div>

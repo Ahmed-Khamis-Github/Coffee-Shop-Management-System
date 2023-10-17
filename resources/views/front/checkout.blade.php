@@ -33,14 +33,17 @@
 		<div class="container-fluid">
 			<div class="row d-flex justify-content-around">
 
-				<form class="col-xl-8 ftco-animate fadeInUp ftco-animated d-flex flex-column">
+				<form class="col-xl-8 ftco-animate fadeInUp ftco-animated d-flex flex-column" action="{{ route('checkout.store') }}" method="post">
+					 
+						@csrf 
+
 					<div action="#" class="billing-form ftco-bg-dark p-3 p-md-5">
 						<h3 class="mb-4 billing-heading">Billing Details</h3>
 						<div class="row align-items-end">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="name">Name</label>
-									<input id="name" type="text" class="form-control" placeholder="">
+									<input id="name" type="text" name="user_name" class="form-control" placeholder="">
 								</div>
 							</div>
 
@@ -48,7 +51,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="streetaddress">Address</label>
-									<input type="text" class="form-control" placeholder="House number and street name">
+									<input type="text" name="user_address" class="form-control" placeholder="House number and street name">
 								</div>
 							</div>
 
@@ -56,7 +59,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="phone">Phone</label>
-									<input type="text" class="form-control" placeholder="">
+									<input type="text" name="mobile_number" class="form-control" placeholder="">
 								</div>
 							</div>
 
@@ -77,31 +80,34 @@
 								<h3 class="billing-heading mb-4">Cart Total</h3>
 								<p class="d-flex total-price">
 									<span>Total</span>
-									<span>$17.60</span>
+									<span>${{ $totalPrice }}</span>
 								</p>
 								<hr>
 								<h3 class="billing-heading mb-4">Payment Method</h3>
 								<div class="form-group">
 									<div class="col-md-12">
 										<div class="radio">
-											<label><input type="radio" name="optradio" class="mr-2">Cash</label>
+											<label><input type="radio" name="payment" value="cash" class="mr-2">Cash</label>
 										</div>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-md-12">
 										<div class="radio">
-											<label><input type="radio" name="optradio" class="mr-2"> Visa</label>
+											<label><input type="radio" name="payment" class="mr-2"> Visa</label>
 										</div>
 									</div>
 								</div>
-								<p><a href="#" class="btn btn-primary py-3 px-4">Place an order</a></p>
+							
+								<p><button class="btn btn-primary py-3 px-4">Place an order</button></p>
+						</form>
 							</div>
 						</div>
-					</form>
+					
 
 					<!-- .col-md-8 -->
 			</div>
+		</form>
 		</div>
 		</div>
 

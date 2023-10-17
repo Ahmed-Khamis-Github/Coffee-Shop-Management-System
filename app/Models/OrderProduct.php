@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
-class OrderProduct extends Model
+use Illuminate\Database\Eloquent\Relations\Pivot;
+
+class OrderProduct extends Pivot
 {
     use HasFactory;
     protected $table = 'order_product';
@@ -20,6 +21,12 @@ class OrderProduct extends Model
         return $this->hasMany(Product::class)->withDefault([
             'name' => $this->product_name
         ]);
+    }
+
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderProduct;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChecksOfflineController extends Controller
@@ -12,7 +15,11 @@ class ChecksOfflineController extends Controller
      */
     public function index()
     {
-        return view('dashboard.orders.offline') ;
+        $users = User::all();
+        $orders = Order::with('items')->where('order_type', 'offline')->get();
+        
+         
+        return view('dashboard.orders.checks', compact('users', 'orders'));
     }
 
     /**
@@ -28,7 +35,7 @@ class ChecksOfflineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request) ;
     }
 
     /**
@@ -52,7 +59,13 @@ class ChecksOfflineController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $Order =Order::findOrFail($id) ;
+
+        $Order->update([
+            'order_status'=>'delivered'
+        ]) ;
+
+        return redirect()->route('checks.index') ;
     }
 
     /**
@@ -60,6 +73,8 @@ class ChecksOfflineController extends Controller
      */
     public function destroy(string $id)
     {
+     
+      
         //
     }
 }
