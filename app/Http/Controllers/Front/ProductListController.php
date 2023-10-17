@@ -17,7 +17,7 @@ class ProductListController extends Controller
      */
     public function index()
     {  
-        $products = Product::paginate(8);
+        $products = Product::where('quantity','>','1')->paginate(8);
         return view('front.home' , compact('products'));
         
     }

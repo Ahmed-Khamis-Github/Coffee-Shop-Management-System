@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -403,7 +404,16 @@
         $cateName.on("input", function(e) {
             $cateSlug.val(slugify($cateName.val()));
         });
+
+        
     </script>
+
+<script>
+    const userID = "{{ Auth::id() }}"
+    console.log(userID) ;
+  </script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script  src="{{ asset('build/assets/app-cfd1def4.js') }}"></script>
 </body>
 
 </html>

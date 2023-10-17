@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\Order as EventsOrder;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -9,6 +10,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class CheckOutController extends Controller
 {
@@ -53,7 +56,8 @@ class CheckOutController extends Controller
         $address = request()->input('user_address');
         $mobile = request()->input('mobile_number');
  
-        
+        Alert::success('Order created', 'Please waite for admin approval');
+
 
 
         $user = $request->user();
@@ -94,14 +98,15 @@ class CheckOutController extends Controller
 
 
             DB::commit();
+            session()->forget('cart');
 
-            // event(new OrderCreated($order)) ;
-
+            
+            event(new EventsOrder($order)) ;
         } catch (Throwable $e) {
             DB::rollBack();
             throw $e;
         }
-        return redirect()->route('home') ;
+        return redirect()->route('orderList')->with('message','Your Order is awaiting for approval from admin') ;
     }
 
     /**
