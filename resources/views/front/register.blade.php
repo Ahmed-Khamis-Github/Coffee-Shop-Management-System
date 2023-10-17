@@ -41,22 +41,9 @@
             </div>
 
             <div class="mt-4 form-group">
-                <input id="image" class="form-control" placeholder="Your profile image" type="file" name="image"
-                    :value="{{ old('image') }}" />
-
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                {{-- <label for="formFile" class="form-label">Default file input example</label> --}}
+                <input class="form-control" type="file" id="image" name="image" :value="{{ old('image') }}">
             </div>
-
-            {{-- remember me  --}}
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox"
-                        class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
-                        name="remember">
-                    <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
 
 
 

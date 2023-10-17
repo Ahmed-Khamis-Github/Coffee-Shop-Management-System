@@ -51,7 +51,9 @@
                              <td>
                                  <ul class="list-inline">
                                      <li class="list-inline-item">
-                                         <img alt="Avatar" class="table-avatar" src="{{ asset($user->image) }} ">
+                                         <img alt="Avatar" src="{{ asset($user->image) }} "
+                                             style="width: 100px;
+                                         border:none; outline:none">
                                      </li>
                                  </ul>
                              </td>
@@ -80,6 +82,10 @@
                      @endforeach
                  </tbody>
              </table>
+
+             <div class="d-flex justify-content-center">
+                 {{ $users->links() }}
+             </div>
          </div>
      </div>
  @endsection

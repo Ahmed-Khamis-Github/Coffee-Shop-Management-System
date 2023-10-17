@@ -29,14 +29,14 @@
             <!-- Password -->
             <div class="form-group">
                 <input id="password" class="form-control" type="password" name="password" required
-                    autocomplete="new-password" />
+                    autocomplete="new-password" placeholder="New Password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <!-- Confirm Password -->
             <div class="form-group">
                 <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required
-                    autocomplete="new-password" />
+                    autocomplete="new-password" placeholder="Confirm Password" />
 
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>

@@ -60,17 +60,20 @@
                         <li class="nav-item">
 
                             <div class="dropdown nav-link">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                <a class=" nav-link dropdown-toggle p-0" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{-- 
+                                    {{ $position = strpos(Auth::user()->namem, ' ') }}
+
+                                    {{ $substring = substr(Auth::user()->name, 0, $position) }}
+
+                                    {{ $substring }} --}}
+
                                     {{ Auth::user()->name }}
-                                    <img src="{{ asset(Auth::user()->image) }}" alt="pofile">
                                 </a>
 
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"
-                                        style="display: flex;
-                                        justify-content: center;
-                                        align-items: center;">
+                                <ul class="dropdown-menu ">
+                                    <li class="nav-item dropdown-item">
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf
                                             <button class="nav-link" type="submit"
@@ -83,7 +86,10 @@
 
 
                         </li>
-                        @endif
+                    @endif
+
+
+
 
                 </ul>
             </div>
