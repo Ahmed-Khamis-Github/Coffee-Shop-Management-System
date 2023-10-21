@@ -29,7 +29,7 @@ class DeductProductQuantity
             $cart = request()->session()->get('cart');
         }
         
-         foreach($cart as $id=>$item)
+          foreach($cart as $id=>$item)
         {
            
             Product::where('id','=',$id)->update([

@@ -169,6 +169,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 69479e1 (pushing invoices edits)
 
     ])->toArray(),
 
@@ -185,6 +190,11 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 69479e1 (pushing invoices edits)
 
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),

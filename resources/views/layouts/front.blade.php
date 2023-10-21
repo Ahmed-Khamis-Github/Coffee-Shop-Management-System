@@ -62,6 +62,7 @@
                                     </small></span></a>
                         </li>
                         <li class="nav-item"><a href="{{ route('orderList') }}" class="nav-link">My Orders</a></li>
+                        <li class="nav-item"><a href="{{ route('chatify') }}" class="nav-link" target="_blank">Live Chat</a></li>
                     @endif
 
                     @if (Auth::user())

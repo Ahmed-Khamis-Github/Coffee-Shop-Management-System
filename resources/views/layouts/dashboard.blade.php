@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>ITI Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -50,7 +50,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="{{ route('categories.index') }}" class="nav-link">Home</a>
                 </li>
 
             </ul>
@@ -231,6 +231,16 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="{{ route('chatify') }}" target="_blank"
+                                class="nav-link">{{-- to highlight the active page --}}
+
+                                <i class="nav-icon fas fa-user" src=""></i>
+                                <p>
+                                    Chat
+                                </p>
+                            </a>
+                        </li>
 
                         <li class="nav-item">
                             <a href="{{ route('categories.index') }}"
@@ -288,17 +298,19 @@
                                     </a>
                                 </li>
 
-									<li class="nav-item">
-										<a href="{{ route('checks.index') }}" class="nav-link">
-											<i class="far fa-circle nav-icon"></i>
-											<p>Check Offline Orders </p>	
-										</a>
-									</li>
+                                <li class="nav-item">
+                                    <a href="{{ route('checks.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Check Offline Orders </p>
+                                    </a>
+                                </li>
 
-								</ul>
-							</li>
+                            </ul>
+                        </li>
 
                     </ul>
+
+
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -334,7 +346,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            <strong>Copyright &copy; 2014-2023 <a href="https://adminlte.io">iti</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0
@@ -404,16 +416,14 @@
         $cateName.on("input", function(e) {
             $cateSlug.val(slugify($cateName.val()));
         });
-
-        
     </script>
 
-<script>
-    const userID = "{{ Auth::id() }}"
-    console.log(userID) ;
-  </script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script  src="{{ asset('build/assets/app-cfd1def4.js') }}"></script>
+    <script>
+        const userID = "{{ Auth::id() }}"
+        console.log(userID);
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{ asset('build/assets/app-cfd1def4.js') }}"></script>
 </body>
 
 </html>

@@ -98,10 +98,11 @@ class CheckOutController extends Controller
 
 
             DB::commit();
-            session()->forget('cart');
 
             
             event(new EventsOrder($order)) ;
+            session()->forget('cart');
+
         } catch (Throwable $e) {
             DB::rollBack();
             throw $e;
@@ -123,6 +124,7 @@ class CheckOutController extends Controller
     public function edit(string $id)
     {
         //
+        
     }
 
     /**
