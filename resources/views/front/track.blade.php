@@ -48,6 +48,7 @@
                                 <th scope="col" class="table-head">Status</th>
                                 <th scope="col" class="table-head">Amount</th>
                                 <th scope="col" class="table-head">Action</th>
+                                <th scope="col" class="table-head">Invoices</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,6 +74,9 @@
                                     <button class="btn btn-link toggle-details" data-order-id="{{ $order->id }}">View
                                         Details</button>
                                 </td>
+                                <form action="{{ route('pdf',$order->id) }}">
+                                <td> <button class="order-table btn btn-primary cancel-click"> Invoice </button></td>
+                                </form>
                             </tr>
                             {{-- // row to display order details --}}
                             <tr class="details-row" id="details-row-{{ $order->id }}" style="display: none;">
