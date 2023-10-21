@@ -156,11 +156,7 @@
                     
                 
 				<tr class="item">
-<<<<<<< HEAD
-					<td>{{ $item->product_name }}</td>
-=======
 					<td>{{ $item->product_name }} : ({{ $item->quantity }})</td>
->>>>>>> 69479e1 (pushing invoices edits)
 
 					<td>${{ $item->price }}</td>
 				</tr>

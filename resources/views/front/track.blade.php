@@ -48,79 +48,58 @@
                                 <th scope="col" class="table-head">Status</th>
                                 <th scope="col" class="table-head">Amount</th>
                                 <th scope="col" class="table-head">Action</th>
-                                <th scope="col" class="table-head">Invoices</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($user_orders as $order)
-<<<<<<< HEAD
-                                 <tr>
-=======
-                                <tr>
->>>>>>> 69479e1 (pushing invoices edits)
-                                    <td>{{ $order->created_at->format('y-m-d') }}</td>
-                                    <td class="order-table">{{ $order->order_status }}</td>
-                                    @php
-                                        $totalPrice = $order->items->sum(function ($item) {
-                                            return $item->price * $item->quantity;
-                                        });
-                                    @endphp
-                                    <td class="order-table">{{ $totalPrice }}</td>
-                                    <td>
-                                        @if ($order->order_status === 'Awaiting_Approval')
-                                            <form method="post" action="{{ route('myOrderUpdate', $order->id) }}">
-                                                @csrf
-                                                @method('put')
-                                                <button class="order-table btn btn-primary cancel-click"> Cancel </button>
-                                            </form>
-                                        @endif
-                                        <button class="btn btn-link toggle-details" data-order-id="{{ $order->id }}">View
-                                            Details</button>
-<<<<<<< HEAD
-                                           
-                                    </td>
-                                    <form action="{{ route('pdf',$order->id) }}">
-                                    <td><button class="order-table btn btn-primary cancel-click"> Invoice </button></td>
-                                </form>
-=======
+                            @foreach ($orders as $order)
 
-                                    </td>
-                                    <form action="{{ route('pdf', $order->id) }}">
-                                        <td><button class="order-table btn btn-primary cancel-click"> Invoice </button></td>
-                                    </form>
->>>>>>> 69479e1 (pushing invoices edits)
-                                </tr>
-                                {{-- // row to display order details --}}
-                                <tr class="details-row" id="details-row-{{ $order->id }}" style="display: none;">
-                                    <td colspan="4">
-                                        <div class="order-details">
-                                            @foreach ($orderDetails as $orderDetail)
-                                                @if ($orderDetail->order_id === $order->id)
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <div class="menu-entry">
-                                                                <a href="#" class="img"
-                                                                    style="background-image: url(assets/front/images/menu-4.jpg);"></a>
-                                                                <div class="text text-center pt-4">
-                                                                    <h3><a
-                                                                            href="#">{{ $orderDetail->product_name }}</a>
-                                                                    </h3>
-                                                                    <p class="price"><span>{{ $orderDetail->price }}</span>
-                                                                    </p>
-                                                                </div>
+                            <tr>
+                                <td>{{ $order->created_at->format('y-m-d') }}</td>
+                                <td class="order-table">{{ $order->order_status }}</td>
+                                @php
+                                $totalPrice = $order->items->sum(function ($item) {
+                                    return $item->price * $item->quantity;
+                                });
+                            @endphp
+                                <td class="order-table">{{ $totalPrice }}</td>
+                                <td>
+                                    @if ($order->order_status === 'Awaiting_Approval')
+                                        <form method="post" action="{{ route('myOrderUpdate', $order->id) }}">
+                                            @csrf
+                                            @method('put')
+                                            <button class="order-table btn btn-primary cancel-click"> Cancel </button>
+                                        </form>
+                                    @endif
+                                    <button class="btn btn-link toggle-details" data-order-id="{{ $order->id }}">View
+                                        Details</button>
+                                </td>
+                            </tr>
+                            {{-- // row to display order details --}}
+                            <tr class="details-row" id="details-row-{{ $order->id }}" style="display: none;">
+                                <td colspan="4">
+                                    <div class="order-details">
+                                        @foreach ($orderDetails as $orderDetail)
+                                            @if ($orderDetail->order_id === $order->id)
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="menu-entry">
+                                                            <a href="#" class="img"
+                                                                style="background-image: url(assets/front/images/menu-4.jpg);"></a>
+                                                            <div class="text text-center pt-4">
+                                                                <h3><a href="#">{{ $orderDetail->product_name }}</a>
+                                                                </h3>
+                                                                <p class="price"><span>{{ $orderDetail->price }}</span></p>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                    </td>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </td>
 
-                                </tr>
-
-                            @empty
-                                @include('sweetalert::alert')
-                            @endforelse
+                            </tr>
+                            @endforeach
 
 
 

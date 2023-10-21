@@ -41,16 +41,13 @@ class ProductListController extends Controller
     public function orderList(Request $request)
     {
         $user= $request->user() ;
-            $order = Order::where('user_id',$user->id)->first();
+            $orders = Order::where('user_id',$user->id)->get();
             
-            $order_items = OrderProduct::where('order_id', $order->id)->get();
-         
-            $totalPrice = $order_items->sum(function ($item) {
-                return $item->price * $item->quantity;
-            });
-     
             $orderDetails = OrderProduct::all();
-            return view('front.track', compact('order', 'orderDetails','totalPrice'));
+         
+           
+     
+             return view('front.track', compact('orders', 'orderDetails'));
     }
 
 
