@@ -233,7 +233,7 @@
 
                         <li class="nav-item">
                             <a href="{{ route('categories.index') }}"
-                                class="nav-link {{ request()->is('categories*') ? 'active' : '' }}">{{-- to highlight the active page --}}
+                                class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }}">
 
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
@@ -243,10 +243,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('products.index') }}" class="nav-link">
-                                {{-- <i class="nav-icon fas fa-th"></i> --}}
-                                <i class="nav-icon fas fa-mug-hot" src=""></i>
-
+                            <a href="{{ route('products.index') }}" class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-mug-hot"></i>
                                 <p>
                                     Products
                                 </p>
@@ -256,8 +254,8 @@
 
 
                         <li class="nav-item">
-                            <a href="{{ route('users.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-user" src=""></i>
+                            <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     users
                                 </p>
@@ -266,7 +264,7 @@
 
 
                         <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                            <a href="#" class="nav-link {{ request()->routeIs('online.index', 'checks.index') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Orders
@@ -275,27 +273,25 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('online.index') }}" class="nav-link active">
+                                    <a href="{{ route('online.index') }}" class="nav-link {{ request()->routeIs('online.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Online Orders</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('offline.index') }}" class="nav-link">
+                                    <a href="{{ route('offline.index') }}" class="nav-link {{ request()->routeIs('offline.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Offline Orders</p>
                                     </a>
                                 </li>
-
-									<li class="nav-item">
-										<a href="{{ route('checks.index') }}" class="nav-link">
-											<i class="far fa-circle nav-icon"></i>
-											<p>Check Offline Orders </p>	
-										</a>
-									</li>
-
-								</ul>
-							</li>
+								<li class="nav-item">
+									<a href="{{ route('checks.index') }}" class="nav-link {{ request()->routeIs('checks.index') ? 'active' : '' }}">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Check Offline Orders </p>	
+									</a>
+								</li>
+							</ul>
+						</li>
 
                     </ul>
                 </nav>
