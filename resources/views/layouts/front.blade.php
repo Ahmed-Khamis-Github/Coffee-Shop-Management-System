@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Coffee - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Coffee ITI</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -33,15 +33,15 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Coffee<small>Blend</small></a>
+            <a class="navbar-brand" href="{{ route('home') }}">Coffee<small>Blend</small></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="{{ route('home')}}" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="" class="nav-link">Cart</a></li>
+                    <li class="nav-item active"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{{ route('carts.index') }}" class="nav-link">Cart</a></li>
 
                     @if (!Auth::user())
                         <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
@@ -49,12 +49,20 @@
                     @endif
 
                     @if (Auth::user())
-                        <li class="nav-item cart"><a href="cart.html" class="nav-link"><span
+                        @php
+                            $cart = request()
+                                ->session()
+                                ->get('cart');
+                            $cartCount = is_array($cart) ? count($cart) : 0;
+                        @endphp
+                        <li class="nav-item cart"><a href="{{ route('carts.index') }}" class="nav-link"><span
                                     class="icon icon-shopping_cart"></span><span
-                                    class="bag d-flex justify-content-center align-items-center"><small>1</small></span></a>
+                                    class="bag d-flex justify-content-center align-items-center"><small>
+                                        {{ $cartCount }}
+                                    </small></span></a>
                         </li>
-                        <li class="nav-item"><a href="{{ route('orderList')}}" class="nav-link">My Orders</a></li>
-
+                        <li class="nav-item"><a href="{{ route('orderList') }}" class="nav-link">My Orders</a></li>
+                        <li class="nav-item"><a href="{{ route('chatify') }}" class="nav-link" target="_blank">Live Chat</a></li>
                     @endif
 
                     @if (Auth::user())
@@ -119,15 +127,15 @@
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
                             there live the blind texts.</p>
-                      
+
                     </div>
                 </div>
-              
+
                 <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
                     <div class="ftco-footer-widget mb-4 ml-md-4">
                         <h2 class="ftco-heading-2">Services</h2>
                         <ul class="list-unstyled">
-                            
+
                             <li><a href="#" class="py-2 d-block">Deliver</a></li>
                             <li><a href="#" class="py-2 d-block">Good Quality</a></li>
                             <li><a href="#" class="py-2 d-block">Mixed</a></li>

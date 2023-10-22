@@ -17,6 +17,7 @@ class CartController extends Controller
             $cart = [];
         } else {
             $cart = $request->session()->get('cart');
+            // dd(count($cart)) ;
         }
 
         $items = collect($cart) ;
@@ -34,6 +35,12 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
+        // if($request->session()->has('cart')){
+        //     $cart = $request->session()->get('cart');
+        //     dd($cart) ;
+        //     $numberOfArrays = count($cart);
+        //     dd($numberOfArrays) ;
+        // }
  
         $product = Product::findOrFail($id) ;
          $productData = [

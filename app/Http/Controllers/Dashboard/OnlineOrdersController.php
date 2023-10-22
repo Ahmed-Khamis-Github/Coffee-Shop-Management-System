@@ -45,8 +45,6 @@ class OnlineOrdersController extends Controller
         $totalPrice = $order_items->sum(function ($item) {
             return $item->price * $item->quantity;
         });
-
-
         return view('dashboard.orders.show', compact('order_items', 'totalPrice'));
     }
 
@@ -85,4 +83,5 @@ class OnlineOrdersController extends Controller
         $order->delete();
         return redirect()->route('online.index');
     }
+    
 }

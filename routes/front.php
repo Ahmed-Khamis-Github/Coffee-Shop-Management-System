@@ -16,6 +16,7 @@ Route::group(['middleware'=>"auth"],function(){
 
 	Route::get('myOrders', [ProductListController::class, 'orderList'])->name('orderList');
 	Route::get('myOrders/filter', [ProductListController::class, 'filter'])->name('filter');
+	Route::get('myOrders/{id}', [ProductListController::class, 'pdf'])->name('pdf');
 	Route::put('myOrders/update/{id}',[ProductListController::class,'update'])->name('myOrderUpdate');
  	Route::resource('checkout', CheckOutController::class);
 	
