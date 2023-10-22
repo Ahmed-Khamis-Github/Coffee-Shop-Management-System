@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-4">
         <h3>Date Range</h3>
-        <form method="post" class="mb-3">
+        <form method="GET" class="mb-3" action="filter">
             @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -16,12 +16,14 @@
                 </div>
             </div>
 
-            <select id="userSelect" name="userSelect" class="form-control my-3">
-                <option value="">Please select user</option>
-                <option value="John Doe">John Doe</option>
-                <option value="Jane Smith">Jane Smith</option>
-                <option value="Ahmed Samir">Ahmed Samir</option>
+            <select id="userSelect" name="userSelect" class="form-control my-3" >
+                <option value="" disabled selected>Select User</option>
+                @foreach ($users as $user )
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endforeach
+
             </select>
+
 
             <div class="row justify-content-center">
                 <button type="submit" class="btn btn-info">Submit</button>
@@ -84,11 +86,11 @@
                             </ul>
 
                         </td>
-                       
+
                 <td>
 
                     <ul class="list-group">
-                            
+
                         <li class="list-group-item list-group-item-danger mb-2">
                             @php
                                 $totalPrice = $order->items->sum(function ($item) {
@@ -99,18 +101,18 @@
                             {{ $totalPrice }}
 
                         </li>
-             
+
             </ul>
                 </td>
 
 
-                
+
 
                 <td><span class="badge badge-warning">{{ $order->order_status }}</span></td>
                 <td>
-                     @if ($order->order_status=="Working_On_It")           
+                     @if ($order->order_status=="Working_On_It")
                     <form action="{{ route('checks.update',$order->id) }}" method="post">
-                        @csrf 
+                        @csrf
                         @method('put')
                     <button class="btn btn-primary btn-sm">Finished</button>
                 </form>
@@ -118,10 +120,10 @@
 
                 @endif
 
-                @if ($order->order_status=="delivered")           
-              
+                @if ($order->order_status=="delivered")
+
                 <form action="{{ route('checks.update',$order->id) }}" method="post">
-                    @csrf 
+                    @csrf
                     @method('put')
                 <button class="btn btn-primary btn-sm" disabled>Finished</button>
             </form>

@@ -31,7 +31,7 @@
                          <th style="width: 30%">
                              Image
                          </th>
-                         <th style="width: 30%">
+                         <th style="width: 30% ; text-align:center">
                              Action
                          </th>
 
@@ -65,6 +65,21 @@
                                      </i>
                                      Edit
                                  </a>
+
+                                 {{-- @if (Gate::allows('isSuperAdmin')) --}}
+                                 <button class="btn btn-secondary btn-sm"
+                                     onclick="confirmAdminRole('{{ route('users.role', $user->id) }}')">
+                                     <i class="fas fa-policy mr-1">
+                                     </i>
+                                     Admin
+                                 </button>
+                                 {{-- @endif --}}
+
+                                 {{-- <button class="btn btn-danger"
+                                     onclick="confirmDelete('{{ route('products.destroy', $product->id) }}')">
+                                     Delete
+                                 </button> --}}
+
                                  <form method="post" action="{{ route('users.destroy', $user->id) }}"
                                      style="display: inline-block ; margin:0">
                                      @csrf
@@ -74,6 +89,8 @@
                                          <i class="fas fa-trash mr-1">
                                          </i>Delete</button>
                                  </form>
+
+
                              </td>
                          </tr>
 
@@ -88,6 +105,30 @@
              </div>
          </div>
      </div>
+
+
+
+     <script>
+         function confirmAdminRole(confirmURL) {
+             if (window.confirm('Are you sure you want to make this user as admin ?')) {
+                 var form = document.createElement('form');
+                 form.setAttribute('method', 'POST');
+                 form.setAttribute('action',  );
+                 var csrfField = document.createElement('input');
+                 csrfField.setAttribute('type', 'hidden');
+                 csrfField.setAttribute('name', '_token');
+                 csrfField.setAttribute('value', '{{ csrf_token() }}');
+                 var methodField = document.createElement('input');
+                 methodField.setAttribute('type', 'hidden');
+                 methodField.setAttribute('name', '_method');
+                 methodField.setAttribute('value', 'DELETE');
+                 form.appendChild(csrfField);
+                 form.appendChild(methodField);
+                 document.body.appendChild(form);
+                 form.submit();
+             }
+         }
+     </script>
  @endsection
 
 

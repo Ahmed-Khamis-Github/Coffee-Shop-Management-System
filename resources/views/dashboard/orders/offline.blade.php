@@ -1,36 +1,38 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/fontawesome-free/css/all.min.css")}}">
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/daterangepicker/daterangepicker.css")}}">
-  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/icheck-bootstrap/icheck-bootstrap.min.css")}}">
-  <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css")}}">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")}}">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/select2/css/select2.min.css")}}">
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
-  <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css")}}">
-  <!-- BS Stepper -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bs-stepper/css/bs-stepper.min.css")}}">
-  <!-- dropzonejs -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/dropzone/min/dropzone.min.css")}}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/dist/css/adminlte.min.css")}}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Dashboard</title>
 
-  
+      <!-- Google Font: Source Sans Pro -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/fontawesome-free/css/all.min.css")}}">
+      <!-- daterange picker -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/daterangepicker/daterangepicker.css")}}">
+      <!-- iCheck for checkboxes and radio inputs -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/icheck-bootstrap/icheck-bootstrap.min.css")}}">
+      <!-- Bootstrap Color Picker -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css")}}">
+      <!-- Tempusdominus Bootstrap 4 -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")}}">
+      <!-- Select2 -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/select2/css/select2.min.css")}}">
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
+      <!-- Bootstrap4 Duallistbox -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css")}}">
+      <!-- BS Stepper -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bs-stepper/css/bs-stepper.min.css")}}">
+      <!-- dropzonejs -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/dropzone/min/dropzone.min.css")}}">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/dist/css/adminlte.min.css")}}">
 </head>
-
-
-
-
-
-
 
 
 <div class="wrapper">
@@ -187,103 +189,89 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
-            <img src="{{ asset('assets/dashboard/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+            <img src="{{ asset('assets/front/images/bg_2.jpg') }}" alt="AdminLTE Logo"
                 class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">AdminLTE 3</span>
+            <span class="brand-text font-weight-light">Coffee Blend</span>
         </a>
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
+            <!-- Sidebar user panel  -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ asset('assets/dashboard/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                        alt="User Image">
+                    <img src="{{ asset('assets/dashboard/dist/img/user2-160x160.jpg') }}"
+                        class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
+                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                 </div>
-            </div>
 
-            <!-- SidebarSearch Form -->
-            <div class="form-inline">
-                <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-sidebar">
-                            <i class="fas fa-search fa-fw"></i>
-                        </button>
-                    </div>
-                </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-outline-light  ml-3">Logout</button>
+                </form>
             </div>
+            <!-- SidebarSearch Form -->
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                                                    with font-awesome or any other icon font library -->
-
-                    <li class="nav-item">
-                        <a href="{{ route('categories.index') }}"
-                            class="nav-link {{ request()->is('categories*') ? 'active' : '' }}">{{-- to highlight the active page --}}
-
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item {{ request()->routeIs('categories.index') ? 'menu-open' : '' }}">
+                        <a href="{{ route('categories.index') }}" class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Categories
-                                <span class="right badge badge-danger">New</span>
                             </p>
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="{{ route('products.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
+                    <li class="nav-item {{ request()->routeIs('products.index') ? 'menu-open' : '' }}">
+                        <a href="{{ route('products.index') }}" class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-mug-hot"></i>
                             <p>
                                 Products
-                                <span class="right badge badge-danger">New</span>
                             </p>
                         </a>
                     </li>
 
-
-
-                    <li class="nav-item">
-                        <a href="{{ route('users.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
+                    <li class="nav-item {{ request()->routeIs('users.index') ? 'menu-open' : '' }}">
+                        <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user"></i>
                             <p>
-                                users
-                                <span class="right badge badge-danger">New</span>
+                                Users
                             </p>
                         </a>
                     </li>
-
 
                     <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <a href="#" class="nav-link {{  request()->routeIs('offline.index') ? 'active' : '' }}">
+                            <i class "nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Orders
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="./index.html" class="nav-link active">
+                            <li class="nav-item {{ request()->routeIs('online.index') ? 'active' : '' }}">
+                                <a href="{{ route('online.index') }}" class="nav-link {{ request()->routeIs('online.index') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Online Orders</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('offline.index') }}" class="nav-link">
+                            <li class="nav-item {{ request()->routeIs('offline.index') ? 'active' : '' }}">
+                                <a href="{{ route('offline.index') }}" class="nav-link {{ request()->routeIs('offline.index') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Offline Orders</p>	
+                                    <p>Offline Orders</p>
                                 </a>
                             </li>
-
+                            <li class="nav-item {{ request()->routeIs('checks.index') ? 'active' : '' }}">
+                                <a href="{{ route('checks.index') }}" class="nav-link {{ request()->routeIs('checks.index') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Check Offline Orders</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
-
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -313,34 +301,60 @@
 
 
             <!-- Main content -->
-    <section class="content">
-        <div class="row">
-          <div class="col-md-6">
+    <section class="content w-100">
+        <div class="row mx-5">
+          <div class="col-md-12 ">
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">General</h3>
-  
+
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>
                   </button>
                 </div>
               </div>
+
+              {{-- //search by product name --}}
+              <form class="mt-3 mx-3" method="GET" action="search">
+                @csrf
+                <!-- Search form -->
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="query">
+              </form>
+
+              {{-- end of serach by product name --}}
+
               <form action="{{ route('offline.store') }}" method="post">
                 @csrf
-              <div class="card-body">
-                    <div class="form-group">
-                      <label>Select User</label>
-                      <select class="select2"  data-placeholder="Select a State" style="width: 100%;" name="user_id">
-                        @foreach ($users as $user )
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>     
-                        @endforeach
-                      </select>
+              <div class="card-body w-100">
+                    <div class="d-flex justify-content-between w-100">
+                        <div class="form-group col-6">
+                            <label>Select User</label>
+
+                          <select class="select2 "  data-placeholder="Select a State"  style="width: 100% ;  " name="user_id">
+                              @foreach ($users as $user )
+                              <option value="{{ $user->id }}">{{ $user->name }}</option>
+                              @endforeach
+                          </select>
+                          </div>
+
+
+                          <div class="form-group col-6">
+                                <label>Rooms Number</label>
+                                <select class="select2"  data-placeholder="Select a State" style="width: 100%;" name="user_id">
+                                  @foreach ($rooms as $room )
+                                  <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                  @endforeach
+                                </select>
+                          </div>
                     </div>
 
-                    
+
+
+
+
                     <div class="form-group">
-                   
+
 
                         <table class="table table-bordered">
                             <thead>
@@ -351,7 +365,7 @@
                                     <th>Quantity</th>
                                 </tr>
                             </thead>
-                       
+
 
                             <tbody>
                                 @foreach ($products as $product)
@@ -362,61 +376,35 @@
                                      <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>
-                                        <input type="number" name="product_quantities[{{ $product->id }}]" value="1" class="form-control">
+                                        <input type="number" name="product_quantities[{{ $product->id }}]" value="1" class="form-control"  min="1" max="10">
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        
+                        {{-- //pagniation --}}
+                        <div class="d-flex justify-content-center ">
+                            {{$products->links()}}
+                          </div>
+                          <div class="form-group">
+                            <label for="inputDescription">Notes</label>
+                            <textarea id="inputDescription" class="form-control" rows="4">Raw denim you probably</textarea>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <a href="#" class="btn btn-secondary">Cancel</a>
+                          <input type="submit" value="Save Changes" class="btn btn-success float-right">
+                        </div>
                       </div>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
-          <div class="col-md-6">
-            <div class="card card-secondary">
-              <div class="card-header">
-                <h3 class="card-title">Details</h3>
-  
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              
-              <div class="card-body">
-                <div class="form-group">
-                      
-                      <div class="form-group">
-                        <label>Rooms Number</label>
-                        <select class="select2"  data-placeholder="Select a State" style="width: 100%;" name="user_id">
-                          @foreach ($rooms as $room )
-                          <option value="{{ $room->id }}">{{ $room->name }}</option>     
-                          @endforeach
-                        </select>
-                      </div>
-                       
-                      </select>
-                    </div>
-                <div class="form-group">
-                    <label for="inputDescription">Notes</label>
-                    <textarea id="inputDescription" class="form-control" rows="4">Raw denim you probably</textarea>
-                  </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-          </div>
+
         </div>
 
-        <div class="row">
-          <div class="col-12">
-            <a href="#" class="btn btn-secondary">Cancel</a>
-            <input type="submit" value="Save Changes" class="btn btn-success float-right">
-          </div>
-        </div>
     </form>
       </section>
       <!-- /.content -->
@@ -430,23 +418,26 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
-
+</html>
      {{-- <tbody>
                                 @foreach ($products as $product)
-                                
+
                                 <tr>
                                     <td>
                                         <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
                                     </td>
                                     <td><img src="{{ $product->image }}" alt=""></td>
-                                   
+
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td><input type="number" name="product_quantities[{{ $product->id }}]" value="1"></td>
                                 </tr>
                                 @endforeach
                             </tbody> --}}
+
+
+
+
 
 
 
@@ -619,5 +610,5 @@
   // DropzoneJS Demo Code End
 </script>
 
-</html>
-    
+
+

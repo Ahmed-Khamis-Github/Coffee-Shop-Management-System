@@ -1,3 +1,7 @@
+@extends('layouts.dashboard')
+@section('content')
+
+
 @extends('layouts.dashboard');
 @section('content');
 
@@ -7,12 +11,8 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-          
-            <a href="{{ route('products.create') }}" type="button" class="btn btn-inline btn-primary col-2 ">Add Product</a>
-          
-              <a href="{{ route('archive') }}" type="button" class="btn btn-inline btn-primary col-2">Archive</a>
-            
-          </div>
+        <h3 class="card-title"> Soft deleted</h3>
+      </div>
       <div class="card-body p-0">
         <table class="table table-striped projects">
             <thead>
@@ -56,7 +56,7 @@
                     <td>
                       {{$product->quantity}}
                     </td>
-                    <td class="text-center">  <img src="{{ asset('images/product_image/'.$product->image) }}"  alt="" height="50px"> </td>
+                    <td>  <img src="{{ asset('images/product_image/'.$product->image) }}" alt="" height="50px"> </td>
                     <td class="project-state">
                       @if($product->quantity>0)
                         <span class="badge badge-success">Available</span>
@@ -66,16 +66,12 @@
                     </td>
 
                     <td class="project-actions text-right d-flex align-items-center" >
-                        <a class="btn btn-info btn-sm mr-3" href="{{route('products.edit' , $product->id)}}">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            Edit
-                        </a>
-                          <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="mt-3">
+                        <form action="{{ route('products.restore', $product->id) }}" method="POST" class="mt-3">
                             @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" >  <i class="fas fa-trash" >
-                            </i>Delete</button>
+                            @method('PUT')
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Restore
+                            </button>
                         </form>
                     </td>
 
@@ -91,4 +87,6 @@
       {{$products->links()}}
     </div>
   </section>
-  @stop
+
+
+@endsection
