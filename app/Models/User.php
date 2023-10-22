@@ -25,7 +25,7 @@ class User extends Authenticatable
         'image' ,
         'password',
         'image',
-        'room',
+        'room_id',
         'provider',
         'provider_id',
         'provider_token',

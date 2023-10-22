@@ -19,11 +19,11 @@
             <select id="userSelect" name="userSelect" class="form-control my-3" >
                 <option value="" disabled selected>Select User</option>
                 @foreach ($users as $user )
-                <option value="{{ $user->id }}">{{ $user->name }}</option>     
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
-              
+
             </select>
-            
+
 
             <div class="row justify-content-center">
                 <button type="submit" class="btn btn-info">Submit</button>
@@ -47,7 +47,7 @@
             <tbody>
                 @foreach ($orders as $order)
                     <tr data-user="John Doe">
-                        <td>{{ $order->user->room->name ?? 'default' }}</td>
+                        <td>{{ $order->user->room->name ?? "default" }}</td>
                         <td>{{ $order->user->name }}</td>
                         <td>{{ $order->created_at->format('Y-m-d') }}</td>
                         <td>
@@ -86,11 +86,11 @@
                             </ul>
 
                         </td>
-                       
+
                 <td>
 
                     <ul class="list-group">
-                            
+
                         <li class="list-group-item list-group-item-danger mb-2">
                             @php
                                 $totalPrice = $order->items->sum(function ($item) {
@@ -101,18 +101,18 @@
                             {{ $totalPrice }}
 
                         </li>
-             
+
             </ul>
                 </td>
 
 
-                
+
 
                 <td><span class="badge badge-warning">{{ $order->order_status }}</span></td>
                 <td>
-                     @if ($order->order_status=="Working_On_It")           
+                     @if ($order->order_status=="Working_On_It")
                     <form action="{{ route('checks.update',$order->id) }}" method="post">
-                        @csrf 
+                        @csrf
                         @method('put')
                     <button class="btn btn-primary btn-sm">Finished</button>
                 </form>
@@ -120,10 +120,10 @@
 
                 @endif
 
-                @if ($order->order_status=="delivered")           
-              
+                @if ($order->order_status=="delivered")
+
                 <form action="{{ route('checks.update',$order->id) }}" method="post">
-                    @csrf 
+                    @csrf
                     @method('put')
                 <button class="btn btn-primary btn-sm" disabled>Finished</button>
             </form>

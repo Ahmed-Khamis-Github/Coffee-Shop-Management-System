@@ -12,14 +12,7 @@
 					<div style="color: red; font-weight: bold"> {{ $message }}</div>
 				@enderror
 			</div>
-			<div class="form-group">
-				<label for="cateSlug">Slug</label>
-				<input type="text" name="slug" class="form-control" id="cateSlug" placeholder="Slug" pattern="[A-Za-z0-9]+"
-					onkeydown="if(['Space'].includes(arguments[0].code)){return false;}" value="{{ old('slug') ?? $category->slug}}">
-				@error('slug')
-					<div style="color: red; font-weight: bold"> {{ $message }}</div>
-				@enderror
-			</div>
+			 
 			<div class="form-group">
 				<label>Description</label>
 				<textarea name="description" class="form-control" rows="3" placeholder="Enter ..." style="height: 49px;">{{ old('name') ?? $category->description}}</textarea>

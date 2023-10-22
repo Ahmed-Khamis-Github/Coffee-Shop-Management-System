@@ -40,6 +40,6 @@ class SocialLoginController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('front.home');
+        return redirect()->route('home');
     }
 }

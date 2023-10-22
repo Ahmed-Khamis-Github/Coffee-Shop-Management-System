@@ -20,7 +20,7 @@ class OfflineOrdersController extends Controller
     public function index()
     {
 
-        $products = Product::paginate(5);
+        $products = Product::where('quantity',">","0")->paginate(5);
         $users = User::all();
         $rooms = Room::all();
         return view('dashboard.orders.offline', compact('users', 'products', 'rooms'));

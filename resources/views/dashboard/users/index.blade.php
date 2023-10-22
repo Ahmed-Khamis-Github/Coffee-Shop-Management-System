@@ -46,7 +46,7 @@
                                  <small>{{ $user->email }}</small>
                              </td>
                              <td>
-                                 <a>{{ $user->room }}</a>
+                                 <a>{{ $user->room->name ?? "online" }}</a>
                              </td>
                              <td>
                                  <ul class="list-inline">
