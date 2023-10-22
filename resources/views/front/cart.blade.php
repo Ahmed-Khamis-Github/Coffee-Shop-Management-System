@@ -42,7 +42,7 @@
                                         <form action="{{ route('carts.destroy', $item['id']) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <td class="product-remove"><button class="btn btn-danger"><span
+                                            <td class="product-remove "><button class="bg-transparent " style="border:none !important; cursor:pointer"><span
                                                         class="icon-close"></span></button></td>
                                         </form>
 
@@ -68,7 +68,7 @@
                                                     data-item-price="{{ $item['price'] }}"
 
                                                     >
-                                                    
+
                                             </div>
                                         </td>
 
@@ -115,7 +115,7 @@
             const newTotal = itemPrice * newQuantity;
             if (!isNaN(newQuantity) && !isNaN(itemPrice)) {
                 const newTotal = itemPrice * newQuantity;
-            
+
             // Send an AJAX request to update the session data
             $.ajax({
                 type: 'POST',
@@ -152,7 +152,7 @@
         // Initial calculation of the total price
         updateCartTotal();
 
-        
+
     });
 
 
