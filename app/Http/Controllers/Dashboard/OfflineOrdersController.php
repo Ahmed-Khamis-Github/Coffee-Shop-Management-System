@@ -20,7 +20,7 @@ class OfflineOrdersController extends Controller
     public function index()
     {
 
-        $products = Product::all();
+        $products = Product::paginate(5);
         $users = User::all();
         $rooms = Room::all();
         return view('dashboard.orders.offline', compact('users', 'products', 'rooms'));
@@ -133,4 +133,18 @@ class OfflineOrdersController extends Controller
     {
         //
     }
+
+    //search by product name
+    public function search(Request $request) {
+
+        $users = User::all();
+        $rooms = Room::all();
+        $search = $request->query->get('query');
+        $products = Product::where(function($query) use ($search){
+          $query->where('name', 'like', "%{$search}%");
+        })->paginate(5);
+        return view('dashboard.orders.offline', compact('users', 'products', 'rooms'));
+      }
+
+
 }

@@ -18,11 +18,12 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(7);
-       
+
         return View('dashboard.products.index', compact('products'));
-    
+
     }
-    
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -85,7 +86,25 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
+
         $product->delete();
         return redirect()->route('products.index');
     }
+
+        // all soft deleted
+        public function archive()
+        {
+            $products = Product::onlyTrashed()->paginate(7);
+
+            return View('dashboard.products.archive', compact('products'));
+
+        }
+				//restore
+        public function restore(string $id)
+        {
+            $products = Product::withTrashed()->findOrFail($id);
+            $products->restore();
+
+            return redirect()->route('products.index');
+        }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-4">
         <h3>Date Range</h3>
-        <form method="post" class="mb-3">
+        <form method="GET" class="mb-3" action="filter">
             @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -16,12 +16,14 @@
                 </div>
             </div>
 
-            <select id="userSelect" name="userSelect" class="form-control my-3">
-                <option value="">Please select user</option>
-                <option value="John Doe">John Doe</option>
-                <option value="Jane Smith">Jane Smith</option>
-                <option value="Ahmed Samir">Ahmed Samir</option>
+            <select id="userSelect" name="userSelect" class="form-control my-3" >
+                <option value="" disabled selected>Select User</option>
+                @foreach ($users as $user )
+                <option value="{{ $user->id }}">{{ $user->name }}</option>     
+                @endforeach
+              
             </select>
+            
 
             <div class="row justify-content-center">
                 <button type="submit" class="btn btn-info">Submit</button>
@@ -45,7 +47,7 @@
             <tbody>
                 @foreach ($orders as $order)
                     <tr data-user="John Doe">
-                        <td>{{ $order->user->room->name }}</td>
+                        <td>{{ $order->user->room->name ?? 'default' }}</td>
                         <td>{{ $order->user->name }}</td>
                         <td>{{ $order->created_at->format('Y-m-d') }}</td>
                         <td>

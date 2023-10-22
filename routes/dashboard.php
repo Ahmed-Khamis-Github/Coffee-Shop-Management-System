@@ -17,10 +17,20 @@ Route::group(['prefix' => 'dashboard' , 'middleware'=>'user.type'], function () 
 
     Route::resource('products', ProductController::class);
 
+    //soft deleted
+    Route::get('archive' , [ProductController::class, 'archive'])->name('archive');
+    Route::put('products/restore/{id}', [ProductController::class, 'restore'])->name('products.restore');
+     
+
 
     Route::prefix('orders')->group(function () {
         Route::resource('offline', OfflineOrdersController::class);
          Route::resource('online', OnlineOrdersController::class);
          Route::resource('checks', ChecksOfflineController::class);
+
+        //route to make filter
+         Route::get('filter', [ChecksOfflineController::class, 'filter'])->name('filter');
+         //route to make search by product name 
+         Route::get('search',[OfflineOrdersController::class , 'search'])->name('search');
     });
 });

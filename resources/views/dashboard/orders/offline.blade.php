@@ -1,36 +1,38 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/fontawesome-free/css/all.min.css")}}">
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/daterangepicker/daterangepicker.css")}}">
-  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/icheck-bootstrap/icheck-bootstrap.min.css")}}">
-  <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css")}}">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")}}">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/select2/css/select2.min.css")}}">
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
-  <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css")}}">
-  <!-- BS Stepper -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bs-stepper/css/bs-stepper.min.css")}}">
-  <!-- dropzonejs -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/dropzone/min/dropzone.min.css")}}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset("assets/dashboard/dist/css/adminlte.min.css")}}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Dashboard</title>
 
-  
+      <!-- Google Font: Source Sans Pro -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/fontawesome-free/css/all.min.css")}}">
+      <!-- daterange picker -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/daterangepicker/daterangepicker.css")}}">
+      <!-- iCheck for checkboxes and radio inputs -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/icheck-bootstrap/icheck-bootstrap.min.css")}}">
+      <!-- Bootstrap Color Picker -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css")}}">
+      <!-- Tempusdominus Bootstrap 4 -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")}}">
+      <!-- Select2 -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/select2/css/select2.min.css")}}">
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
+      <!-- Bootstrap4 Duallistbox -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css")}}">
+      <!-- BS Stepper -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/bs-stepper/css/bs-stepper.min.css")}}">
+      <!-- dropzonejs -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/plugins/dropzone/min/dropzone.min.css")}}">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="{{asset("assets/dashboard/dist/css/adminlte.min.css")}}">
 </head>
-
-
-
-
-
-
 
 
 <div class="wrapper">
@@ -313,9 +315,9 @@
 
 
             <!-- Main content -->
-    <section class="content">
-        <div class="row">
-          <div class="col-md-6">
+    <section class="content w-100">
+        <div class="row mx-5">
+          <div class="col-md-12 ">
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">General</h3>
@@ -326,18 +328,44 @@
                   </button>
                 </div>
               </div>
+
+              {{-- //search by product name --}}
+              <form class="mt-3 mx-3" method="GET" action="search">
+                @csrf
+                <!-- Search form -->
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="query">
+              </form>
+
+              {{-- end of serach by product name --}}
+          
               <form action="{{ route('offline.store') }}" method="post">
                 @csrf
-              <div class="card-body">
-                    <div class="form-group">
-                      <label>Select User</label>
-                      <select class="select2"  data-placeholder="Select a State" style="width: 100%;" name="user_id">
-                        @foreach ($users as $user )
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>     
-                        @endforeach
-                      </select>
+              <div class="card-body w-100">
+                    <div class="d-flex justify-content-between w-100">
+                        <div class="form-group col-6">
+                            <label>Select User</label>
+                          
+                          <select class="select2 "  data-placeholder="Select a State"  style="width: 100% ;  " name="user_id">
+                              @foreach ($users as $user )
+                              <option value="{{ $user->id }}">{{ $user->name }}</option>     
+                              @endforeach
+                          </select>            
+                          </div>
+                         
+                            
+                          <div class="form-group col-6">
+                                <label>Rooms Number</label>
+                                <select class="select2"  data-placeholder="Select a State" style="width: 100%;" name="user_id">
+                                  @foreach ($rooms as $room )
+                                  <option value="{{ $room->id }}">{{ $room->name }}</option>     
+                                  @endforeach
+                                </select>
+                          </div>
                     </div>
-
+                  
+                         
+                      
+                   
                     
                     <div class="form-group">
                    
@@ -362,61 +390,35 @@
                                      <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>
-                                        <input type="number" name="product_quantities[{{ $product->id }}]" value="1" class="form-control">
+                                        <input type="number" name="product_quantities[{{ $product->id }}]" value="1" class="form-control"  min="1" max="10">
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        
+                        {{-- //pagniation --}}
+                        <div class="d-flex justify-content-center ">
+                            {{$products->links()}}
+                          </div>
+                          <div class="form-group">
+                            <label for="inputDescription">Notes</label>
+                            <textarea id="inputDescription" class="form-control" rows="4">Raw denim you probably</textarea>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <a href="#" class="btn btn-secondary">Cancel</a>
+                          <input type="submit" value="Save Changes" class="btn btn-success float-right">
+                        </div>
                       </div>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
-          <div class="col-md-6">
-            <div class="card card-secondary">
-              <div class="card-header">
-                <h3 class="card-title">Details</h3>
-  
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              
-              <div class="card-body">
-                <div class="form-group">
-                      
-                      <div class="form-group">
-                        <label>Rooms Number</label>
-                        <select class="select2"  data-placeholder="Select a State" style="width: 100%;" name="user_id">
-                          @foreach ($rooms as $room )
-                          <option value="{{ $room->id }}">{{ $room->name }}</option>     
-                          @endforeach
-                        </select>
-                      </div>
-                       
-                      </select>
-                    </div>
-                <div class="form-group">
-                    <label for="inputDescription">Notes</label>
-                    <textarea id="inputDescription" class="form-control" rows="4">Raw denim you probably</textarea>
-                  </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-          </div>
+          
         </div>
-
-        <div class="row">
-          <div class="col-12">
-            <a href="#" class="btn btn-secondary">Cancel</a>
-            <input type="submit" value="Save Changes" class="btn btn-success float-right">
-          </div>
-        </div>
+      
     </form>
       </section>
       <!-- /.content -->
@@ -430,8 +432,7 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
-
+</html>
      {{-- <tbody>
                                 @foreach ($products as $product)
                                 
@@ -447,6 +448,10 @@
                                 </tr>
                                 @endforeach
                             </tbody> --}}
+
+
+
+
 
 
 
@@ -619,5 +624,6 @@
   // DropzoneJS Demo Code End
 </script>
 
-</html>
+
+     
     

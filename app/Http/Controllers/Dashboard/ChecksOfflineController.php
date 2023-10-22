@@ -77,4 +77,28 @@ class ChecksOfflineController extends Controller
       
         //
     }
+
+    //make filter using Date
+    public function filter(Request $request)
+    {
+        $users = User::all();
+        $orders = Order::with('items')->where('order_type', 'offline');
+     
+        $dateFrom = $request->dateFrom;
+        $dateTo = $request->dateTo;
+        $userSelect = $request->userSelect;
+    
+        if ($dateFrom && $dateTo) {
+            $orders->whereDate('created_at', '>=', date('Y-m-d', strtotime($dateFrom)))
+                   ->whereDate('created_at', '<=', date('Y-m-d', strtotime($dateTo)));
+        }
+    
+        if ($userSelect) {
+            $orders->where('user_id', $userSelect);
+        }
+    
+        $orders = $orders->get();
+    
+        return view('dashboard.orders.checks', compact('orders', 'users'));
+    }
 }
