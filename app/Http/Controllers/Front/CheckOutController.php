@@ -141,6 +141,9 @@ class CheckOutController extends Controller
 			$this->createOrder($request);
 			return redirect()->route('orderList')->with('message', 'Your Order is awaiting for approval from admin');
 		} elseif ($request->payment_method == 'visa') {
+			if($this->getCartTotalPrice($request)==0){
+				return to_route('home');
+			}
 			return view('front.payment', compact('name', 'address', 'mobile'));
 		}
 	}
