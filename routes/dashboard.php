@@ -14,15 +14,15 @@ Route::group(['prefix' => 'dashboard' , 'middleware'=>'user.type'], function () 
     Route::resource('categories', CategoryController::class);
 
     Route::resource('users', UserController::class);
-
+    
     Route::resource('products', ProductController::class);
-
+    
     //soft deleted
     Route::get('archive' , [ProductController::class, 'archive'])->name('archive');
     Route::put('products/restore/{id}', [ProductController::class, 'restore'])->name('products.restore');
      
 
-
+    
     Route::prefix('orders')->group(function () {
         Route::resource('offline', OfflineOrdersController::class);
          Route::resource('online', OnlineOrdersController::class);
@@ -34,3 +34,5 @@ Route::group(['prefix' => 'dashboard' , 'middleware'=>'user.type'], function () 
          Route::get('search',[OfflineOrdersController::class , 'search'])->name('search');
     });
 });
+
+Route::delete('dashboard/users/role/{id}'  , [UserController::class , 'admin'])->name("users.role");

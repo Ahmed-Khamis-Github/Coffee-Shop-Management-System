@@ -7,6 +7,8 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 // use App\Http\Request\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -14,6 +16,7 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -28,9 +31,9 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
+
     {
-       $rooms=  Room::all() ;
-        return view('dashboard.users.create',compact('rooms'));
+        return view('dashboard.users.create');
     }
 
     /**
@@ -69,6 +72,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+       
         $user = User::findOrFail($id);
         $rooms =Room::all() ;
 
@@ -107,8 +111,32 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+
+        if($user->role=="superAdmin"){
+            return abort('403');
+        }
+
         $user->delete();
 
         return redirect()->route('users.index');        
+    }
+
+
+    public function admin($id){
+        //change the user role to admin
+
+        //check first if this user is super admin
+        if (Gate::allows('isSuperAdmin') ){
+
+            $user = User::findOrFail($id);
+            $user->role = "admin";
+            // dd($user);
+            $user->save();
+
+            return redirect()->route('users.index');
+            
+      
+        }
+        return abort('403');
     }
 }

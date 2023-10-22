@@ -47,8 +47,10 @@ class AuthenticatedSessionController extends Controller
 
     public function storeAdmin(LoginRequest $request)
     {
-        $user = User::where('email', $request->email)->where('role' , "admin")->first();
-        
+        $user = User::where('email', $request->email)
+        ->whereIn('role', ["admin", "superAdmin"])
+        ->first();
+            
 
         if(! $user){
             return redirect()->route('dashboardLogin')->with("message" ,"wrong email or password !");
