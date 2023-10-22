@@ -33,10 +33,9 @@
 		<div class="container-fluid">
 			<div class="row d-flex justify-content-around">
 
-				<form class="col-xl-8 ftco-animate fadeInUp ftco-animated d-flex flex-column" action="{{ route('checkout.store') }}" method="post">
-					 
-						@csrf 
-
+				<form class="col-xl-8 ftco-animate fadeInUp ftco-animated d-flex flex-column" action="{{ route('checkout.store') }}"
+					method="post">
+					@csrf
 					<div action="#" class="billing-form ftco-bg-dark p-3 p-md-5">
 						<h3 class="mb-4 billing-heading">Billing Details</h3>
 						<div class="row align-items-end">
@@ -84,34 +83,15 @@
 								</p>
 								<hr>
 								<h3 class="billing-heading mb-4">Payment Method</h3>
-								<div class="form-group">
-									<div class="col-md-12">
-										<div class="radio">
-											<label><input type="radio" name="payment" value="cash" class="mr-2">Cash</label>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-md-12">
-										<div class="radio">
-											<label><input type="radio" name="payment" class="mr-2"> Visa</label>
-										</div>
-									</div>
-								</div>
-							
-								<p><button class="btn btn-primary py-3 px-4">Place an order</button></p>
-						</form>
+								<button class="btn btn-primary p-3 m-2" name='payment_method' value='cash'>Cash</button>
+								<button class="btn btn-primary p-3 m-2" name='payment_method' value='visa'>Visa</button>
+
 							</div>
 						</div>
-					
-
-					<!-- .col-md-8 -->
+						<!-- .col-md-8 -->
+					</div>
+				</form>
 			</div>
-		</form>
-		</div>
-		</div>
-
-		</div>
 		</div>
 	</section>
 @endsection
